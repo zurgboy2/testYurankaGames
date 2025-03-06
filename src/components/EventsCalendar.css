@@ -311,7 +311,7 @@
   }
   .calendar-day {
     aspect-ratio: 1;
-    min-height: unset;
+    min-height:auto;
     padding: 0.25rem;
     position: relative;
     display: flex;

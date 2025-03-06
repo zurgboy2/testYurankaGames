@@ -1,7 +1,7 @@
 .events-container {
     max-width: 100%;
     padding: 2rem 1rem;
-    background-color: #0D0A0A;
+    background-color: #0E0C0C;
     min-height: 100vh;
 }
 
@@ -120,6 +120,7 @@
     margin-top: 3rem;
     margin-left: 2rem;
     margin-right: 2rem;
+    background-color: #0E0C0C;
 }
 
 .tournament-details-section p {
@@ -280,6 +281,7 @@
 @media (max-width: 768px) {
     .events-title {
         font-size: 1.3rem;
+        margin-left: 1rem;
     }
 
     .tournament-cards-container {
@@ -338,7 +340,7 @@
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .tournament-details-section {
-        padding: 3rem 0.25rem;
+        padding: 2rem 0.25rem;
         margin-left: 1rem;
         margin-right: 1rem;
     }
@@ -395,8 +397,10 @@
     }
 
     .form-group input {
-        padding: 0.75rem;
+        padding: 1rem 0.75rem;
         max-width: 550px;
+        min-width: 250px;
+
     }
 
     .disclaimer-section {
@@ -409,13 +413,13 @@
     }
 
     .disclaimer-text {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         margin-top: 0rem;
     }
 
     .proceed-button {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
+        padding: 1rem 3.5rem;
+        font-size: 1rem;
     }
 }
 

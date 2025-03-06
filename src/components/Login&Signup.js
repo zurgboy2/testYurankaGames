@@ -2,14 +2,15 @@ import React, { useState,useEffect } from "react";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import "./Login&Signup.css"; 
 import { makeRequestCall } from "../api/api";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginAndSignup =()=>{
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(location.state?.isLogin ?? true);    const [username, setUsername] = useState("");
     const [usernameAvailable, setUsernameAvailable] = useState(null);
     const [checkingUsername, setCheckingUsername] = useState(false);
-    
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
       name: "",
       username: "",
@@ -82,9 +83,8 @@ const LoginAndSignup =()=>{
               sessionStorage.setItem("name", data.name);
               sessionStorage.setItem("email", data.email);
               sessionStorage.setItem("avatarurl", data.image_url);
-              //window.location.href = "/index.html"; // Redirect to home page
               alert("Logged in!");
-
+              navigate("/");
             } else {
               alert("Sign up successful! Please log in.");
               setIsLogin(true); // Switch to login form

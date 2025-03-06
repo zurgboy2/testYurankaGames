@@ -13,6 +13,7 @@ import React, { useEffect } from 'react';
 import EventsLandingPageSection from '../components/EventsLanding';
 import BoardGamesSection from '../components/BoardGames';
 import LoginAndSignup from '../components/Login&Signup';
+import FAQSection from '../components/FAQ';
 
 function Home() {
    useEffect(() => {
@@ -26,6 +27,7 @@ function Home() {
       <AboutUs/>
       <OurServices/>
       <EventsLandingPageSection/>
+      <FAQSection/>
       <Footer/>
 
       {/* <Navbar/>

@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import './Home.css';
 import AboutYuranka from '../components/AboutYuranka';
 import React, { useEffect } from 'react';
+import FAQSection from '../components/FAQ';
 
 function AboutUsPage() {
      useEffect(() => {
@@ -15,6 +16,7 @@ function AboutUsPage() {
   
     <Navbar/>
      <AboutYuranka/>
+     <FAQSection/>
      <Footer/>
 
   

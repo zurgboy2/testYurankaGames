@@ -4,6 +4,7 @@ import './Events.css';
 import moment from 'moment';
 import noposter from "../assets/noposter.png";
 import { useLocation,useNavigate  } from "react-router-dom";
+import EventsCalendar from './EventsCalendar';
 
 //   makeRequestCall('tournament_script','getActiveTournaments').then(tournamentData => {
 //     const tournaments = JSON.parse(tournamentData.result);
@@ -74,6 +75,13 @@ useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top on component mount
   }
 }, [tournaments,location.state]);
+
+const handleEventClick = (tournament) => {
+  setSelectedTournament(tournament);
+  if (detailsRef.current) {
+    detailsRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 return (
   <div className ="events-container"> 
@@ -175,6 +183,10 @@ return (
         )
         }
 
+<EventsCalendar 
+            tournaments={TEST_EVENTS} 
+            onEventClick={handleEventClick}
+          />
   
   <div ref={detailsRef}>
   <TournamentDetailsSection tournament={selectedTournament} />
@@ -400,4 +412,782 @@ const ConfirmationPopup = ({ result, errorMessage, onClose }) => {
   );
 };
 
+
+
  export default EventsSection; 
+
+ const TEST_EVENTS = [
+  // March 1
+  {
+    id: 1,
+    name: "Yu-Gi-Oh! Weekly Tournament",
+    date: "2025-03-01T10:30:00.000Z",
+    time: "18:00",
+    price: 5,
+    isOneTime: false
+  },
+  {
+    id: 2,
+    name: "Magic: The Gathering Commander Night",
+    date: "2025-03-01T10:30:00.000Z",
+    time: "19:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 3,
+    name: "Pokemon TCG Championship Qualifier",
+    date: "2025-03-01T10:30:00.000Z",
+    time: "14:00",
+    price: 25,
+    isOneTime: true
+  },
+  
+  // March 2
+  {
+    id: 4,
+    name: "Board Game Night",
+    date: "2025-03-02T10:30:00.000Z",
+    time: "17:00",
+    price: 3,
+    isOneTime: false
+  },
+  {
+    id: 5,
+    name: "Dungeons & Dragons Session",
+    date: "2025-03-02T10:30:00.000Z",
+    time: "19:00",
+    price: 8,
+    isOneTime: false
+  },
+  {
+    id: 6,
+    name: "Magic Standard Tournament",
+    date: "2025-03-02T10:30:00.000Z",
+    time: "15:00",
+    price: 12,
+    isOneTime: true
+  },
+
+  // March 3
+  {
+    id: 7,
+    name: "Pokemon League Challenge",
+    date: "2025-03-03T10:30:00.000Z",
+    time: "13:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 8,
+    name: "Yu-Gi-Oh! Championship Series",
+    date: "2025-03-03T10:30:00.000Z",
+    time: "11:00",
+    price: 30,
+    isOneTime: true
+  },
+  {
+    id: 9,
+    name: "Magic Modern Tournament",
+    date: "2025-03-03T10:30:00.000Z",
+    time: "18:00",
+    price: 15,
+    isOneTime: false
+  },
+
+  // March 4
+  {
+    id: 10,
+    name: "Weekly Magic Modern",
+    date: "2025-03-04T10:30:00.000Z",
+    time: "18:00",
+    price: 8,
+    isOneTime: false
+  },
+  {
+    id: 11,
+    name: "Flesh and Blood Tournament",
+    date: "2025-03-04T10:30:00.000Z",
+    time: "19:30",
+    price: 12,
+    isOneTime: true
+  },
+  {
+    id: 12,
+    name: "Pokemon Trading League",
+    date: "2025-03-04T10:30:00.000Z",
+    time: "16:00",
+    price: 5,
+    isOneTime: false
+  },
+
+  // March 5
+  {
+    id: 13,
+    name: "Yu-Gi-Oh! Beginner Night",
+    date: "2025-03-05T10:30:00.000Z",
+    time: "18:00",
+    price: 5,
+    isOneTime: false
+  },
+  {
+    id: 14,
+    name: "Magic Pro Qualifier",
+    date: "2025-03-05T10:30:00.000Z",
+    time: "16:00",
+    price: 35,
+    isOneTime: true
+  },
+  {
+    id: 15,
+    name: "Board Game Tournament",
+    date: "2025-03-05T10:30:00.000Z",
+    time: "19:00",
+    price: 8,
+    isOneTime: true
+  },
+
+  // March 6
+  {
+    id: 16,
+    name: "Pokemon VGC Tournament",
+    date: "2025-03-06T10:30:00.000Z",
+    time: "17:00",
+    price: 15,
+    isOneTime: true
+  },
+  {
+    id: 17,
+    name: "Magic Commander League",
+    date: "2025-03-06T10:30:00.000Z",
+    time: "19:00",
+    price: 10,
+    isOneTime: false
+  },
+
+  // March 7
+  {
+    id: 18,
+    name: "Yu-Gi-Oh! Friday Night",
+    date: "2025-03-07T10:30:00.000Z",
+    time: "18:00",
+    price: 8,
+    isOneTime: false
+  },
+  {
+    id: 19,
+    name: "Magic Friday Night Magic",
+    date: "2025-03-07T10:30:00.000Z",
+    time: "19:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 20,
+    name: "Pokemon League Cup",
+    date: "2025-03-07T10:30:00.000Z",
+    time: "16:00",
+    price: 20,
+    isOneTime: true
+  },
+
+  // Continue for March 8-31...
+  // March 8
+  {
+    id: 21,
+    name: "Weekend Magic Draft",
+    date: "2025-03-08T10:30:00.000Z",
+    time: "14:00",
+    price: 15,
+    isOneTime: false
+  },
+  {
+    id: 22,
+    name: "Yu-Gi-Oh! Structure Deck Tournament",
+    date: "2025-03-08T10:30:00.000Z",
+    time: "16:00",
+    price: 25,
+    isOneTime: true
+  },
+
+  // March 9
+  {
+    id: 23,
+    name: "Pokemon Sunday Challenge",
+    date: "2025-03-09T10:30:00.000Z",
+    time: "13:00",
+    price: 12,
+    isOneTime: false
+  },
+  {
+    id: 24,
+    name: "Magic Pioneer Tournament",
+    date: "2025-03-09T10:30:00.000Z",
+    time: "15:00",
+    price: 18,
+    isOneTime: true
+  },
+
+  // March 10
+  {
+    id: 25,
+    name: "Yu-Gi-Oh! Modern Format",
+    date: "2025-03-10T10:30:00.000Z",
+    time: "18:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 26,
+    name: "Magic Pauper Night",
+    date: "2025-03-10T10:30:00.000Z",
+    time: "19:00",
+    price: 8,
+    isOneTime: false
+  },
+  {
+    id: 27,
+    name: "Magic: The Gathering Standard Showdown",
+    date: "2025-03-11T10:30:00.000Z",
+    time: "18:00",
+    price: 15,
+    isOneTime: false
+  },
+  {
+    id: 28,
+    name: "Pokemon Trading Card League",
+    date: "2025-03-11T10:30:00.000Z",
+    time: "16:00",
+    price: 5,
+    isOneTime: false
+  },
+  {
+    id: 29,
+    name: "Yu-Gi-Oh! Master Duel Tournament",
+    date: "2025-03-11T10:30:00.000Z",
+    time: "19:00",
+    price: 20,
+    isOneTime: true
+  },
+
+  // March 12
+  {
+    id: 30,
+    name: "Flesh and Blood Blitz",
+    date: "2025-03-12T10:30:00.000Z",
+    time: "18:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 31,
+    name: "D&D Adventure League",
+    date: "2025-03-12T10:30:00.000Z",
+    time: "19:00",
+    price: 5,
+    isOneTime: false
+  },
+  {
+    id: 32,
+    name: "Magic Modern Championship Qualifier",
+    date: "2025-03-12T10:30:00.000Z",
+    time: "17:00",
+    price: 30,
+    isOneTime: true
+  },
+
+  // March 13
+  {
+    id: 33,
+    name: "Pokemon VGC Practice",
+    date: "2025-03-13T10:30:00.000Z",
+    time: "17:00",
+    price: 8,
+    isOneTime: false
+  },
+  {
+    id: 34,
+    name: "Yu-Gi-Oh! Speed Duel Tournament",
+    date: "2025-03-13T10:30:00.000Z",
+    time: "18:30",
+    price: 12,
+    isOneTime: true
+  },
+
+  // March 14
+  {
+    id: 35,
+    name: "Friday Night Magic",
+    date: "2025-03-14T10:30:00.000Z",
+    time: "19:00",
+    price: 15,
+    isOneTime: false
+  },
+  {
+    id: 36,
+    name: "Pokemon League Challenge",
+    date: "2025-03-14T10:30:00.000Z",
+    time: "17:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 37,
+    name: "Yu-Gi-Oh! Regional Qualifier",
+    date: "2025-03-14T10:30:00.000Z",
+    time: "15:00",
+    price: 25,
+    isOneTime: true
+  },
+
+  // March 15
+  {
+    id: 38,
+    name: "Magic Commander Tournament",
+    date: "2025-03-15T10:30:00.000Z",
+    time: "14:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 39,
+    name: "Board Game Championship",
+    date: "2025-03-15T10:30:00.000Z",
+    time: "16:00",
+    price: 15,
+    isOneTime: true
+  },
+  {
+    id: 40,
+    name: "Pokemon Trading Card Workshop",
+    date: "2025-03-15T10:30:00.000Z",
+    time: "12:00",
+    price: 5,
+    isOneTime: false
+  },
+
+  // March 16
+  {
+    id: 41,
+    name: "Yu-Gi-Oh! Sunday Showdown",
+    date: "2025-03-16T10:30:00.000Z",
+    time: "13:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 42,
+    name: "Magic Pioneer Challenge",
+    date: "2025-03-16T10:30:00.000Z",
+    time: "15:00",
+    price: 18,
+    isOneTime: true
+  },
+  {
+    id: 43,
+    name: "Flesh and Blood Sealed Event",
+    date: "2025-03-16T10:30:00.000Z",
+    time: "17:00",
+    price: 25,
+    isOneTime: true
+  },
+
+  // March 17
+  {
+    id: 44,
+    name: "St. Patrick's Day Special Tournament",
+    date: "2025-03-17T10:30:00.000Z",
+    time: "18:00",
+    price: 17,
+    isOneTime: true
+  },
+  {
+    id: 45,
+    name: "Pokemon League Cup",
+    date: "2025-03-17T10:30:00.000Z",
+    time: "16:00",
+    price: 15,
+    isOneTime: false
+  },
+
+  // March 18
+  {
+    id: 46,
+    name: "Magic Modern Night",
+    date: "2025-03-18T10:30:00.000Z",
+    time: "19:00",
+    price: 12,
+    isOneTime: false
+  },
+  {
+    id: 47,
+    name: "Yu-Gi-Oh! Casual Play",
+    date: "2025-03-18T10:30:00.000Z",
+    time: "17:00",
+    price: 5,
+    isOneTime: false
+  },
+  {
+    id: 48,
+    name: "Board Game Social",
+    date: "2025-03-18T10:30:00.000Z",
+    time: "18:00",
+    price: 3,
+    isOneTime: false
+  },
+
+  // March 19
+  {
+    id: 49,
+    name: "Pokemon VGC Tournament",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "17:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 50,
+    name: "Magic Draft Night",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "18:30",
+    price: 15,
+    isOneTime: false
+  },
+
+  // March 20
+  {
+    id: 51,
+    name: "Yu-Gi-Oh! Championship Series",
+    date: "2025-03-20T10:30:00.000Z",
+    time: "16:00",
+    price: 30,
+    isOneTime: true
+  },
+  {
+    id: 52,
+    name: "D&D Campaign Night",
+    date: "2025-03-20T10:30:00.000Z",
+    time: "19:00",
+    price: 8,
+    isOneTime: false
+  },
+  {
+    id: 53,
+    name: "Flesh and Blood Casual Play",
+    date: "2025-03-20T10:30:00.000Z",
+    time: "17:30",
+    price: 5,
+    isOneTime: false
+  },
+
+  // March 21
+  {
+    id: 54,
+    name: "Magic Standard Tournament",
+    date: "2025-03-21T10:30:00.000Z",
+    time: "18:00",
+    price: 15,
+    isOneTime: false
+  },
+  {
+    id: 55,
+    name: "Pokemon Trading League",
+    date: "2025-03-21T10:30:00.000Z",
+    time: "16:00",
+    price: 5,
+    isOneTime: false
+  },
+
+  // March 22
+  {
+    id: 56,
+    name: "Yu-Gi-Oh! Weekend Championship",
+    date: "2025-03-22T10:30:00.000Z",
+    time: "14:00",
+    price: 25,
+    isOneTime: true
+  },
+  {
+    id: 57,
+    name: "Magic Commander Social",
+    date: "2025-03-22T10:30:00.000Z",
+    time: "16:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 58,
+    name: "Board Game Tournament",
+    date: "2025-03-22T10:30:00.000Z",
+    time: "18:00",
+    price: 12,
+    isOneTime: true
+  },
+
+  // March 23
+  {
+    id: 59,
+    name: "Pokemon Sunday Series",
+    date: "2025-03-23T10:30:00.000Z",
+    time: "13:00",
+    price: 15,
+    isOneTime: false
+  },
+  {
+    id: 60,
+    name: "Magic Modern Masters",
+    date: "2025-03-23T10:30:00.000Z",
+    time: "15:00",
+    price: 30,
+    isOneTime: true
+  },
+
+  // March 24
+  {
+    id: 61,
+    name: "Yu-Gi-Oh! Beginner Tournament",
+    date: "2025-03-24T10:30:00.000Z",
+    time: "17:00",
+    price: 8,
+    isOneTime: false
+  },
+  {
+    id: 62,
+    name: "Magic Pauper Championship",
+    date: "2025-03-24T10:30:00.000Z",
+    time: "19:00",
+    price: 12,
+    isOneTime: true
+  },
+  {
+    id: 63,
+    name: "D&D One-Shot Adventure",
+    date: "2025-03-24T10:30:00.000Z",
+    time: "18:00",
+    price: 10,
+    isOneTime: true
+  },
+
+  // March 25
+  {
+    id: 64,
+    name: "Pokemon League Challenge",
+    date: "2025-03-25T10:30:00.000Z",
+    time: "16:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 65,
+    name: "Magic Legacy Tournament",
+    date: "2025-03-25T10:30:00.000Z",
+    time: "18:00",
+    price: 35,
+    isOneTime: true
+  },
+
+  // March 26
+  {
+    id: 66,
+    name: "Yu-Gi-Oh! Draft Tournament",
+    date: "2025-03-26T10:30:00.000Z",
+    time: "17:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 67,
+    name: "Board Game Night",
+    date: "2025-03-26T10:30:00.000Z",
+    time: "19:00",
+    price: 5,
+    isOneTime: false
+  },
+
+  // March 27
+  {
+    id: 68,
+    name: "Magic Pro Tour Qualifier",
+    date: "2025-03-27T10:30:00.000Z",
+    time: "15:00",
+    price: 40,
+    isOneTime: true
+  },
+  {
+    id: 69,
+    name: "Pokemon Trading Card Social",
+    date: "2025-03-27T10:30:00.000Z",
+    time: "17:00",
+    price: 5,
+    isOneTime: false
+  },
+  {
+    id: 70,
+    name: "Flesh and Blood Pro Quest",
+    date: "2025-03-27T10:30:00.000Z",
+    time: "18:30",
+    price: 30,
+    isOneTime: true
+  },
+
+  // March 28
+  {
+    id: 71,
+    name: "Yu-Gi-Oh! Friday Tournament",
+    date: "2025-03-28T10:30:00.000Z",
+    time: "18:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 72,
+    name: "Magic Friday Night Standard",
+    date: "2025-03-28T10:30:00.000Z",
+    time: "19:00",
+    price: 15,
+    isOneTime: false
+  },
+
+  // March 29
+  {
+    id: 73,
+    name: "Pokemon Regional Championship",
+    date: "2025-03-29T10:30:00.000Z",
+    time: "10:00",
+    price: 35,
+    isOneTime: true
+  },
+  {
+    id: 74,
+    name: "Magic Sealed League",
+    date: "2025-03-29T10:30:00.000Z",
+    time: "14:00",
+    price: 25,
+    isOneTime: true
+  },
+  {
+    id: 75,
+    name: "Board Game Marathon",
+    date: "2025-03-29T10:30:00.000Z",
+    time: "16:00",
+    price: 15,
+    isOneTime: true
+  },
+
+  // March 30
+  {
+    id: 76,
+    name: "Yu-Gi-Oh! Championship",
+    date: "2025-03-30T10:30:00.000Z",
+    time: "13:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 77,
+    name: "Magic Commander Challenge",
+    date: "2025-03-30T10:30:00.000Z",
+    time: "15:00",
+    price: 15,
+    isOneTime: false
+  },
+
+  // March 31
+  {
+    id: 78,
+    name: "Pokemon End of Month Tournament D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "17:00",
+    price: 12,
+    isOneTime: true
+  },
+  {
+    id: 79,
+    name: "Magic Modern Monday D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "19:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 80,
+    name: "D&D Special Campaign Finale D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "18:00",
+    price: 15,
+    isOneTime: true
+  }
+  ,
+  {
+    id: 81,
+    name: "D&D Special Campaign Finale D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "18:00",
+    price: 15,
+    isOneTime: true
+  }
+  ,
+  {
+    id: 75,
+    name: "Board Game Marathon",
+    date: "2025-03-29T10:30:00.000Z",
+    time: "16:00",
+    price: 15,
+    isOneTime: true
+  },
+
+  // March 30
+  {
+    id: 76,
+    name: "Yu-Gi-Oh! Championship",
+    date: "2025-03-30T10:30:00.000Z",
+    time: "13:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 77,
+    name: "Magic Commander Challenge",
+    date: "2025-03-30T10:30:00.000Z",
+    time: "15:00",
+    price: 15,
+    isOneTime: false
+  },
+
+  // March 31
+  {
+    id: 78,
+    name: "Pokemon End of Month Tournament D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "17:00",
+    price: 12,
+    isOneTime: true
+  },
+  {
+    id: 79,
+    name: "Magic Modern Monday D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "19:00",
+    price: 10,
+    isOneTime: false
+  },
+  {
+    id: 80,
+    name: "D&D Special Campaign Finale D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "18:00",
+    price: 15,
+    isOneTime: true
+  }
+  ,
+  {
+    id: 81,
+    name: "D&D Special Campaign Finale D&D Special Campaign Finale",
+    date: "2025-03-31T10:30:00.000Z",
+    time: "18:00",
+    price: 15,
+    isOneTime: true
+  }
+
+  // Continue this pattern for the rest of March...
+];

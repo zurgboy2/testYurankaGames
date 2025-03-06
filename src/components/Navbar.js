@@ -3,11 +3,13 @@ import "./Navbar.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/logo.png"; // Make sure to replace this with your actual logo path
 import { Link,useNavigate } from "react-router-dom";
+import avatarImg from "../assets/logo.png"; 
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const username = sessionStorage.getItem("username");
 
 //   useEffect(() => {
 //     const handleClickOutside = (event) => {
@@ -73,20 +75,51 @@ useEffect(() => {
         <li><Link to="/about">About Us</Link></li>
 
         {/* Auth Buttons for Mobile */}
-      <li className="mobile-auth">
-        <button className="signin" onClick={() => navigate("/login&signup", { state: { isLogin: true } })}>Login</button>
-      </li>
-      <li className="mobile-auth">
-        <button className="signup" onClick={() => navigate("/login&signup", { state: { isLogin: false } })}>Sign Up</button>
-      </li>
+        {sessionStorage.getItem("username") ? (
+  <li className="mobile-auth">
+    <div className="mobile-user-profile" onClick={() => navigate("/dashboard")}>
+      <img src={avatarImg} alt="User Avatar" className="mobile-avatar" />
+      <span className="mobile-username">{sessionStorage.getItem("username")}</span>
+    </div>
+  </li>
+) : (
+  <>
+    <li className="mobile-auth">
+      <button className="signin" onClick={() => navigate("/login&signup", { state: { isLogin: true } })}>
+        Login
+      </button>
+    </li>
+    <li className="mobile-auth">
+      <button className="signup" onClick={() => navigate("/login&signup", { state: { isLogin: false } })}>
+        Sign Up
+      </button>
+    </li>
+  </>
+)}
       </ul>
 
       {/* Auth Buttons */}
-      <div className="auth-buttons">
-        <button className="signin" onClick={() => navigate("/login&signup", { state: { isLogin: true } })}>Login</button>
-        <button className="signup" onClick={() => navigate("/login&signup", { state: { isLogin: false } })}>Sign Up</button>
-      </div>
-
+      {username ? (
+        <div className="user-profile" onClick={() => navigate("/dashboard")}>
+          <img src={avatarImg} alt="User Avatar" className="avatar" />
+          <span className="username">{username}</span>
+        </div>
+      ) : (
+        <div className="auth-buttons">
+          <button
+            className="signin"
+            onClick={() => navigate("/login&signup", { state: { isLogin: true } })}
+          >
+            Login
+          </button>
+          <button
+            className="signup"
+            onClick={() => navigate("/login&signup", { state: { isLogin: false } })}
+          >
+            Sign Up
+          </button>
+        </div>
+      )}
  
     </nav>
   );

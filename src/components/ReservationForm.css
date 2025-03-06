@@ -358,6 +358,11 @@ select option {
         font-size: 2rem !important;
     }
 
+    .disclaimer-section p {
+        width: 95%;
+        font-size: 0.75rem;
+    }
+
     .reservation-options {
         gap: 1rem;
         overflow-x: auto;
@@ -390,7 +395,7 @@ select option {
     }
 
     .reservation-card p {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         min-height: 9rem;
         margin-top: 0rem;
         margin-bottom: 0rem;
@@ -439,12 +444,12 @@ select option {
         color: #E5E7EB;
         background: linear-gradient(180deg, #4D4D4D 0%, #4C3838 100%);
         transition: 0.3s;
-        max-width: 80%;
+        max-width: 90%;
         margin: 0rem;
     }
 
     .submit-button {
-        width: 80%;
+        width: 70%;
         font-size: 1rem;
         padding: 0.8rem 1rem;
         margin-top: 2.5rem;

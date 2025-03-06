@@ -94,6 +94,28 @@
     white-space: nowrap;
 }
 
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    margin-right: 4rem;
+
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.username {
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
 .menu-icon {
     display: none;
     /* Hidden on desktop */
@@ -171,7 +193,7 @@
         background: #0E0C0C;
         flex-direction: column;
         align-items: left;
-        gap: 1rem;
+        gap: 1.5rem;
         padding: 0rem 1.5rem;
         transition: transform 0.15s ease-in-out;
         z-index: 999;
@@ -188,7 +210,7 @@
 
     /* Optionally adjust links styling */
     .nav-links li a {
-        font-size: 1rem;
+        font-size: 1.3rem;
         color: #E5E7EB;
         text-decoration: none;
     }
@@ -201,17 +223,46 @@
     }
 
     .mobile-auth .signin {
-        font-size: 1rem;
+        font-size: 1.3rem;
         color: #EF4444;
         text-decoration: none;
         padding: 0rem;
     }
 
     .mobile-auth .signup {
-        font-size: 1rem;
+        font-size: 1.3rem;
         color: #EF4444;
         text-decoration: none;
         padding: 0rem;
         background-color: #0E0C0C;
+    }
+
+    .mobile-auth .signup {
+        background-color: #0E0C0C;
+    }
+
+    /* Mobile User Profile */
+    .mobile-user-profile {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        gap: 10px;
+        padding: 0.5rem;
+    }
+
+    .mobile-avatar {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+
+    .mobile-username {
+        font-size: 1rem;
+        font-weight: bold;
+        color: white;
+    }
+
+    .user-profile {
+        display: none;
     }
 }

@@ -71,8 +71,8 @@ const EventsCalendar = ({ tournaments, onEventClick }) => {
           {isMobile ? (
             // Mobile: Show event dots
             dayEvents.length > 0 && (
-              <div className={`event-indicators ${dayEvents.length > 6 ? 'has-more' : ''}`}>
-                {dayEvents.slice(0, 6).map((event, index) => (
+              <div className="event-indicators">
+                {dayEvents.map((event, index) => (
                   <div 
                     key={index} 
                     className={`event-dot ${event.isOneTime ? 'one-time' : 'weekly'}`} 

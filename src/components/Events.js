@@ -853,6 +853,62 @@ const ConfirmationPopup = ({ result, errorMessage, onClose }) => {
     price: 15,
     isOneTime: false
   },
+  
+
+  // March 19
+  {
+    id: 49,
+    name: "Pokemon VGC Tournament",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "17:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 50,
+    name: "Magic Draft Night",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "18:30",
+    price: 15,
+    isOneTime: false
+  }
+  ,
+
+  // March 19
+  {
+    id: 49,
+    name: "Pokemon VGC Tournament",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "17:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 50,
+    name: "Magic Draft Night",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "18:30",
+    price: 15,
+    isOneTime: false
+  },
+
+  // March 19
+  {
+    id: 49,
+    name: "Pokemon VGC Tournament",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "17:00",
+    price: 20,
+    isOneTime: true
+  },
+  {
+    id: 50,
+    name: "Magic Draft Night",
+    date: "2025-03-19T10:30:00.000Z",
+    time: "18:30",
+    price: 15,
+    isOneTime: false
+  },
 
   // March 20
   {

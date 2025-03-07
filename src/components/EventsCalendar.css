@@ -311,14 +311,14 @@
   }
   .calendar-day {
     aspect-ratio: 1;
-    min-height:auto;
+    min-height: unset;
     padding: 0.25rem;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: unset;
-    max-width: 28px;
+    min-width: 0;
+    max-width: 100%;
     padding-bottom: 0.5rem;
   }
 

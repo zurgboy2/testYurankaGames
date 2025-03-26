@@ -184,7 +184,8 @@ return (
         }
 
 <EventsCalendar 
-            tournaments={TEST_EVENTS} 
+            // tournaments={TEST_EVENTS} 
+            tournaments={tournaments} 
             onEventClick={handleEventClick}
           />
   

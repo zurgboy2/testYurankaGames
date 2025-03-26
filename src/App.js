@@ -7,6 +7,8 @@ import AboutUsPage from './pages/AboutUsPage';
 import EventsPage from './pages/EventsPage';
 import LoginAndSignupPage from './pages/Login&SignupPage';
 import DashboardPage from './pages/DashboardPage';
+import VideoGamesPage from './pages/VideoGamesPage';
+import BoardGamesPage from './pages/BoardGamesPage';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/login&signup" element={<LoginAndSignupPage/>}/>
         <Route path="/dashboard" element={<DashboardPage/>}/>
+        <Route path="/videogames" element={<VideoGamesPage/>}/>
+        <Route path="/boardgames" element={<BoardGamesPage/>}/>
 
       </Routes>
     </div>

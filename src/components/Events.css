@@ -27,6 +27,16 @@
     margin-left: 2.5rem;
 }
 
+.events-subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0rem;
+    color: #E5E7EB;
+    margin-top: 3rem;
+    margin-left: 2.5rem;
+}
+
 /* Individual card styling */
 .tournament-card {
     background-color: #EAE8E8;

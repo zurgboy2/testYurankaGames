@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { makeVideoGamesRequestCall } from '../api/api'; // Adjust the import based on your structure
 import './VideoGames.css'; // Create a CSS file for styling
 import noposter from "../assets/noposter.png";
- 
+import { FaSearch } from 'react-icons/fa'; 
+import { useNavigate } from 'react-router-dom';
+
 const VideoGamesSection = () => {
   const [games, setGames] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -10,7 +12,13 @@ const VideoGamesSection = () => {
   const [gamesByConsole, setGamesByConsole] = useState({});
   const [visibleCount, setVisibleCount] = useState({});
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState(''); 
 
+ const navigate = useNavigate();
+ 
+ const handleReserveGame = () => {
+    navigate('/reservations'); // Navigate to the reservations page
+};
 
   useEffect(() => {
       async function fetchGames() {
@@ -43,6 +51,17 @@ const VideoGamesSection = () => {
 
       setGamesByConsole(groupedGames);
       setVisibleCount(Object.keys(groupedGames).reduce((acc, key) => ({ ...acc, [key]: initialCount }), {}));
+  }
+
+  function handleSearchChange(e) {
+    setActiveFilter("All Games");
+    setSearchQuery(e.target.value);
+  }
+
+  // Function to filter games based on search query
+  function filterGames(gameList) {
+    if (!searchQuery.trim()) return gameList; 
+    return gameList.filter(game => game.name.toLowerCase().includes(searchQuery.toLowerCase()));
   }
 
   function handleFilterClick(filter) {
@@ -82,6 +101,19 @@ const VideoGamesSection = () => {
         {!loading && (
         <>
        <h1 className="video-games-title">Video Games</h1>
+       <p className="video-games-subtitle">Browse our wide range of games and reserve a Couch Space to play. Each couch space can accomadate upto 6 people.</p>
+       <button className="videogames-reserve-button" onClick={handleReserveGame}>Reserve Couch Space</button>
+       <div className="search-bar-container">
+            <input
+              type="text"
+              placeholder="Search for a game..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            <div className="search-icon">
+              <FaSearch />
+            </div>
+          </div>
        <h2 className="video-games-filter">Filters</h2>
 
           <div className="filters">
@@ -91,11 +123,13 @@ const VideoGamesSection = () => {
           </div>
           <div className="games-container">
               {activeFilter === 'All Games' ? (
-                  Object.entries(gamesByConsole).map(([consoleType, games]) => (
+                  Object.entries(gamesByConsole).map(([consoleType, games]) => {
+                    const filteredGames = filterGames(games);
+                    return (
                       <div key={consoleType} className="console-section">
                           <h3>{consoleType}</h3>
                           <div className="games-grid">
-                              {games.slice(0, visibleCount[consoleType]).map(game => (
+                              {filteredGames.slice(0, visibleCount[consoleType]).map(game => (
                                   <div key={game.id} className="game-card">
                                       <img src={game.imageUrl === "No Image" ? noposter : game.imageUrl} alt="Game poster" />
                                       <h4>{game.name}</h4>
@@ -116,8 +150,12 @@ const VideoGamesSection = () => {
                               <button className="display-button" onClick={() => toggleGameDisplay(consoleType, games.length)}>
                                   {visibleCount[consoleType] >= games.length && games.length > (window.innerWidth <= 768 ? 4 : 7) ? 'View Less' : 'View More'}
                               </button>
-                          )}</div>
-                  ))
+                          )
+                          }
+                          </div>
+                  );
+                        }
+                )
               ) : (
                   <div className="filtered-games">
                       <h3>{activeFilter}</h3>

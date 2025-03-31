@@ -200,7 +200,7 @@ const ReservationForm = () => {
             {timeSlots.map((slot) => (
               <button
                 key={slot}
-                className={`time-slot ${startTime === slot ? "selected" : ""}`}
+                className={`reservationform-time-slot ${startTime === slot ? "selected" : ""}`}
                 onClick={() => handleStartTimeChange(slot)}
               >
                 {slot}
@@ -218,7 +218,7 @@ const ReservationForm = () => {
               .map((slot) => (
                 <button
                   key={slot}
-                  className={`time-slot ${endTime === slot ? "selected" : ""}`}
+                  className={`reservationform-time-slot ${endTime === slot ? "selected" : ""}`}
                   onClick={() => handleEndTimeChange(slot)}
                 >
                   {slot}

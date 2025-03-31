@@ -20,7 +20,7 @@
   text-align: left;
   margin-bottom: 1.5rem;
   color: #E5E7EB;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
   margin-left: 2.5rem;
 }
 
@@ -164,6 +164,67 @@
   background: darkred;
 }
 
+.search-bar-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem 2rem 0rem 2rem;
+}
+
+.search-bar-container input {
+  width: 100%;
+  padding: 0.8rem 2.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  outline: none;
+  background: linear-gradient(135deg, #f0f4f8, #e0e7ff); /* Gradient background */
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: all 0.3s ease; /* Smooth transition for hover/focus */
+}
+
+/* Focus state for input */
+.search-bar-container input:focus {
+  border-color: #EC4527; /* Blue border on focus */
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3); /* Blue shadow on focus */
+}
+
+.search-bar-container .search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #EC4527;
+  transition: color 0.3s ease;
+}
+
+.video-games-subtitle {
+  font-size: 1.2rem;
+  color: #E5E7EB;
+  margin: 2.5rem 2rem 1rem 2rem;
+  padding: 0rem;
+}
+
+.videogames-reserve-button{
+  display: block;
+  background-color: #EC4527;
+  color: #E5E7EB;
+  border: none;
+  padding: 0.8rem 1rem;
+  font-size: 16px;
+  border-radius: 5px;
+  
+  text-align: center;
+  margin: 1rem 2rem ;
+  transition: background-color 0.3s ease;
+}
+
+.videogames-reserve-button:hover {
+  background-color: #e04e2a;
+}
+
 @media (max-width: 768px) {
   .games-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -276,4 +337,33 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .search-bar-container {
+      max-width: 70%; /* Full width on mobile */
+      margin: 0.5rem 1rem; /* Reduced margin on mobile */
+  }
+
+  .search-bar-container input {
+      padding: 0.8rem 2rem; /* Slightly smaller padding */
+      font-size: 0.9rem; /* Smaller font size for mobile */
+  }
+
+  .search-bar-container .search-icon {
+      font-size: 1rem; /* Adjust the icon size for mobile */
+      left: 12px; /* Ensure it's not too close to the input edge */
+  }
+  .video-games-subtitle {
+    font-size: 1rem;  /* Reduce font size */
+    margin: 1.5rem 1rem 1rem 1rem;  /* Reduce margins */
+  }
+
+  .videogames-reserve-button {
+    font-size: 0.9rem;  /* Slightly smaller text */
+    padding: 0.7rem 0rem; /* Adjust padding */
+    width: 90%; /* Make button wider */
+    max-width: 300px; /* Limit maximum width */
+    margin: 1rem 0.8rem;
+  }
 }

@@ -83,109 +83,144 @@ const handleEventClick = (tournament) => {
   }
 };
 
+
 return (
-  <div className ="events-container"> 
+  <div className="events-container"> 
     <h1 className="events-title">Upcoming Tournaments & Events</h1>
-
-{loading? (  <div className="loading-container">
-          <div className="spinner"></div>
-          <p>Loading events & tournaments...</p>
-        </div>)
-        :(
-          <div className="tournament-cards-container">
-    {tournaments.map((tournament, index) => (
-      <div key={index} className="tournament-card">
-        {/* <div className="card-image">
-          <img src={tournament.posterUrl} alt={tournament.name} />
-        </div> */}
-        {/* <div className="card-image">
-          {tournament.id >46 &&(
-          <img src={"https://ik.imagekit.io/mcgszbooe/Blue_Eyes_White_Destiny_Structure_Deck_Pre-release_tournament_q07R__tum"} alt={tournament.name} />
-
-          )}
-        </div> */}
-        {/* <div className="card-image">
-          {tournament.id <47 &&(
-          <img src={tournament.posterUrl} alt={tournament.name} />
-
-          )}
-        </div> */}
-        
-        <div className="card-image">
-          <img src={tournament.posterUrl} alt={noposter} />
-          </div>
-
-        <h3 className="card-title">{tournament.name}</h3>
-        <div className="card-details">
-        <div className="detail-item">
-        <span className="label">Date:</span> 
-        <span className="detail-value">{tournament.date 
-        ? moment(tournament.date).format("MMMM Do dddd")
-        : "To be informed"}</span>
-        </div>
-        <div className="detail-item">
-         <span className="label">Time:</span> 
-         <span className="detail-value">{tournament.time || "To be informed"}</span>
-         </div>
-        <div className="detail-item">
-        <span className="label">Entrance fee:</span> 
-        <span className="detail-value">{tournament.price || "To be informed"} EUR</span>
-        </div>
-          <div className="detail-item">
-            <span className="label"></span> <span className="detail-readerinfo">
-              {tournament.readerInfo|| ""} </span>
-          </div>
-          {/* <div className="detail-item">
-            <span className="detail-readerinfo">
-            Get behind the wheel in Aetherdrift, a multiversal 
-            race filled with adrenaline-fueled Magic gameplay across three planes.
-            </span>
-            </div> */}
-             <div className="detail-item">
-            <span className="detail-readerinfo">
-            🏆 Prizes:
-          🎲 1 Random Attendee(who didn't get any extra prizing): 1x Aetherdrift Booster Pack
-          🎟 Per Win Bonus: 1x Booster Pack of Aetherdrift for every match you win!
-
-            </span>
-            </div>
-             {/* <div className="detail-item">
-            <span className="detail-readerinfo">
-            📜 Rules:
-            🔄 Format: Best of Three
-            ⏱ Time Limit: 50 minutes per match
-            ⏱ End of match time procedures: 5 turns, starting from 0.
-            🃏 Deck Size: 40 cards
-            📘 Deckbuilding Guide: A leaflet in your Pre-release Bundle will provide instructions to help you build your deck.
-
-            </span>
-            </div> */}
-             <div className="detail-item">
-            <span className="detail-readerinfo">
-            🎒 Pre-Release Bundle Includes:
-            📦 6 Aetherdrift Booster Packs
-            ✨ 1 Aetherdrift Promo Pack (at least Rare)
-            🎲 D20 Die (1 of 5 colors!)
-            📄 Deckbuilding Leafl
-            </span>
-            </div>
-        </div>
-        <button className="register-button" onClick={()=>{setSelectedTournament(tournament);
-          //  if (detailsRef.current) {
-          //   detailsRef.current.scrollIntoView({ behavior: 'smooth' });
-          // }
-         }}>Register</button>
+    
+    {/* One-Time Events Section */}
+    <h2 className="events-subtitle">One-Time Events</h2>
+    {loading ? (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading Events & Tournaments...</p>
       </div>
-    )
-    )
-    }
-  </div>
-        )
-        }
+    ) : (
+      <div className="tournament-cards-container">
+        {tournaments
+          .filter(tournament => tournament.isOneTime)
+          .map((tournament, index) => (
+            <div key={index} className="tournament-card">
+              <div className="card-image">
+                <img src={tournament.posterUrl||noposter} alt={tournament.name} />
+              </div>
+              <h3 className="card-title">{tournament.name}</h3>
+              <div className="card-details">
+                <div className="detail-item">
+                  <span className="detail-readerinfo">{tournament.description || ""}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="label">Date:</span> 
+                  <span className="detail-value">
+                    {tournament.date ? moment(tournament.date).format("MMMM Do dddd") : "To be informed"}
+                  </span>
+                </div>
+                <div className="detail-item">
+                  <span className="label">Time:</span> 
+                  <span className="detail-value">{formatTime(tournament.date)|| "To be informed"}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="label">Entrance fee:</span> 
+                  <span className="detail-value">{tournament.price + " EUR" || "To be informed"}</span>
+                </div>
+                {tournament.prizes && (
+                  <div className="detail-item">
+                    <span className="detail-readerinfo">
+                      {"Prizes: " + tournament.prizes}
+                    </span>
+                  </div>
+                )}
+                {tournament.preReleaseBundleIncludes && (
+                  <div className="detail-item">
+                    <span className="detail-readerinfo">
+                      {"Pre-Release Bundle Includes: " + tournament.preReleaseBundleIncludes}
+                    </span>
+                  </div>
+                )}
+                {tournament.rules && (
+                  <div className="detail-item">
+                    <span className="detail-readerinfo">
+                      {"Rules: " + tournament.rules}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <button className="register-button" onClick={() => {
+                setSelectedTournament(tournament);
+              }}>Register</button>
+            </div>
+          ))}
+      </div>
+    )}
+
+    {/* Weekly Events Section */}
+    <h2 className="events-subtitle">Weekly Events</h2>
+    {loading ? (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading Weekly Events & Tournaments...</p>
+      </div>
+    ) : (
+      <div className="tournament-cards-container">
+        {tournaments
+          .filter(tournament => !tournament.isOneTime)
+          .map((tournament, index) => (
+            <div key={index} className="tournament-card">
+              <div className="card-image">
+              <img src={tournament.posterUrl||noposter} alt={tournament.name} />
+              </div>
+              <h3 className="card-title">{tournament.name}</h3>
+              <div className="card-details">
+                <div className="detail-item">
+                  <span className="detail-readerinfo">{tournament.description || ""}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="label">Date:</span> 
+                  <span className="detail-value">
+                    {tournament.date ? moment(tournament.date).format("MMMM Do dddd") : "To be informed"}
+                  </span>
+                </div>
+                <div className="detail-item">
+                  <span className="label">Time:</span> 
+                  <span className="detail-value">{formatTime(tournament.date) || "To be informed"}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="label">Entrance fee:</span> 
+                  <span className="detail-value">{tournament.price + " EUR" || "To be informed"}</span>
+                </div>
+                {tournament.prizes && (
+                  <div className="detail-item">
+                    <span className="detail-readerinfo">
+                      {"Prizes: " + tournament.prizes}
+                    </span>
+                  </div>
+                )}
+                {tournament.preReleaseBundleIncludes && (
+                  <div className="detail-item">
+                    <span className="detail-readerinfo">
+                      {"Pre-Release Bundle Includes: " + tournament.preReleaseBundleIncludes}
+                    </span>
+                  </div>
+                )}
+                {tournament.rules && (
+                  <div className="detail-item">
+                    <span className="detail-readerinfo">
+                      {"Rules: " + tournament.rules}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <button className="register-button" onClick={() => {
+                setSelectedTournament(tournament);
+              }}>Register</button>
+            </div>
+          ))}
+      </div>
+    )}
 
 <EventsCalendar 
-            // tournaments={TEST_EVENTS} 
-            tournaments={tournaments} 
+            tournaments={TEST_EVENTS} 
+            //tournaments={tournaments} 
             onEventClick={handleEventClick}
           />
   
@@ -195,7 +230,6 @@ return (
   </div>
 
   </div>
-  
 );
 }
 
@@ -238,6 +272,7 @@ const TournamentDetailsSection = ({ tournament }) => {
     // const loadingOverlay = document.getElementById("loadingOverlay");
     // loadingOverlay.style.display = "flex";
 
+    console.log(googleToken);
     try {
       const result = await makeRegistrationRequestCall('tournament_script','registerForEvent', {
         eventId: tournament.id,
@@ -294,7 +329,7 @@ const TournamentDetailsSection = ({ tournament }) => {
       <div className="details-top">
         {/* Left Column: Image Box */}
         <div className="image-box">
-          <img src={tournament.posterUrl} alt={noposter} className="tournament-image" />
+          <img src={tournament.posterUrl|| noposter} alt={tournament.name} className="tournament-image" />
         </div>
         {/* Right Column: Tournament Details */}
         <div className="details-column">
@@ -310,36 +345,44 @@ const TournamentDetailsSection = ({ tournament }) => {
           </div>
           <div className="detail-row">
             <span className="detail-label">Time:</span>
-            <span className="detail-val">{tournament.time||"To be informed. Stay tuned!"}</span>
+            <span className="detail-val">{formatTime(tournament.date)||"To be informed. Stay tuned!"}</span>
           </div>
           {/* <div className="detail-row">
             <span className="detail-label">Entrance Fee:</span>
             <span className="detail-val">€{tournament.price||"To be informed. Stay tuned!"}</span>
           </div> */}
-          <div className="detail-row">
+           {tournament.description && (
+            <div className="detail-row">
+            <span className="detail-label-bundle">Description:</span>
+            <span className="detail-value-bundle">{tournament.description}</span>
+          </div> 
+        )}
+          {tournament.preReleaseBundleIncludes && (
+            <div className="detail-row">
             <span className="detail-label-bundle">Pre-Release Bundle Includes:</span>
-            <span className="detail-value-bundle">Aetherdrift Booster Packs ✨ 1 Aetherdrift Promo Pack (at least Rare) 🎲 D20 Die (1 of 5 colors!) 📄 Deckbuilding Leafl</span>
+            <span className="detail-value-bundle">{tournament.preReleaseBundleIncludes}</span>
           </div>
-          <div className="detail-row">
+        )}
+          {tournament.prizes &&(
+            <div className="detail-row">
             <span className="detail-label">Prizes:</span>
-            <span className="detail-value-prizes">🎲 1 Random Attendee(who didn't get any extra prizing): 1x Aetherdrift Booster Pack 🎟 Per Win Bonus: 1x Booster Pack of Aetherdrift for every match you win!</span>
+            <span className="detail-value-prizes">{tournament.prizes}</span>
           </div>
-          <div className="detail-row">
+          )}          
+          {tournament.rules && (
+            <div className="detail-row">
             <span className="detail-label">Rules:</span>
             <span className="detail-value-rules">
-            📜 Rules:
-            🔄 Format: Best of Three
-            ⏱ Time Limit: 50 minutes per match
-            ⏱ End of match time procedures: 5 turns, starting from 0.
-            🃏 Deck Size: 40 cards
-            📘 Deckbuilding Guide: A leaflet in your Pre-release Bundle will provide instructions to help you build your deck.
+            {tournament.rules}
             </span>
           </div>
-          <div className="detail-row">
+          )}          
+          {tournament.price && (
+            <div className="detail-row">
             <span className="detail-label">Entrance Fee:</span>
             <span className="detail-val">{tournament.price||"To be informed. Stay tuned!"} EUR</span>
           </div>
-
+          )}          
         </div>
       </div>
       {/* Registration Form: Name and Email */}
@@ -397,9 +440,14 @@ const ConfirmationPopup = ({ result, errorMessage, onClose }) => {
         ) : (
           <>
             <p className="modal-message">
-              {result?.checkoutUrl
-                ? "Your registration is confirmed. Please proceed to checkout. If you cannot pay via PayPal, you can pay at the store. Please note that your place is only confirmed once payment is received."
-                : "Your registration is confirmed and no payment is required. Enjoy the event!"}
+            {result?.checkoutUrl ? (
+            "Your registration is confirmed. Please proceed to checkout. If you cannot pay via PayPal, you can pay at the store. Please note that your place is only confirmed once payment is received."
+              ) : result?.message ===
+            "Unfortunately, the event is full. Your registration could not be completed. Please check back later or contact support." ? (
+            result.message
+            ) : (
+            "Your registration is confirmed and no payment is required. Enjoy the event!"
+            )}
             </p>
             {result?.checkoutUrl && (
               <a href={result.checkoutUrl} target="_blank" rel="noopener noreferrer" className="checkout-btn">
@@ -416,6 +464,15 @@ const ConfirmationPopup = ({ result, errorMessage, onClose }) => {
 
 
  export default EventsSection; 
+
+ const formatTime = (isoDate) => {
+  if (!isoDate) return null;
+  
+  const date = new Date(isoDate);
+  if (isNaN(date.getTime())) return null; // Check for invalid dates
+
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+};
 
  const TEST_EVENTS = [
   // March 1
@@ -872,8 +929,7 @@ const ConfirmationPopup = ({ result, errorMessage, onClose }) => {
     time: "18:30",
     price: 15,
     isOneTime: false
-  }
-  ,
+  },
 
   // March 19
   {

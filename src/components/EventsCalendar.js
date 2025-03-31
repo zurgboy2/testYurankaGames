@@ -38,6 +38,8 @@ const EventsCalendar = ({ tournaments, onEventClick }) => {
     }
   };
 
+  
+
   const renderCalendarDays = () => {
     const { firstDay, lastDay } = daysInMonth();
     const days = [];
@@ -60,6 +62,7 @@ const EventsCalendar = ({ tournaments, onEventClick }) => {
 
       const hasOneTimeEvent = dayEvents.some(event => event.isOneTime);
       const hasWeeklyEvent = dayEvents.some(event => !event.isOneTime);
+    
 
       days.push(
         <div 
@@ -107,7 +110,7 @@ const EventsCalendar = ({ tournaments, onEventClick }) => {
                         onClick={() => onEventClick(event)}
                       >
                         <p className="event-title">{event.name}</p>
-                        <p className="event-time">Time: {event.time}</p>
+                        <p className="event-time">Time: {formatTime(event.date) || "To be informed"}</p>
                         <p className="event-price">Entry: {event.price} EUR</p>
                       </div>
                     ))}
@@ -134,7 +137,9 @@ const EventsCalendar = ({ tournaments, onEventClick }) => {
     const dayEvents = tournaments.filter(t => 
       moment(t.date).format('YYYY-MM-DD') === dateString
     );
-  
+
+   
+
     return (
       <div ref={selectedDayRef} className="selected-events-wrapper">
         <div className="selected-day-events">
@@ -152,8 +157,8 @@ const EventsCalendar = ({ tournaments, onEventClick }) => {
                 onClick={() => onEventClick(event)}
               >
                 <p className="event-title">{event.name}</p>
-                <p className="event-time">Time: {event.time}</p>
-                <p className="event-price">Entry: {event.price} EUR</p>
+                <p className="event-time">Time: {formatTime(event.date)||"To be informed"}</p>
+                <p className="event-price">Entry fee: {event.price} EUR</p>
               </div>
             ))}
           </div>
@@ -212,3 +217,12 @@ const EventsCalendar = ({ tournaments, onEventClick }) => {
 };
 
 export default EventsCalendar; 
+
+const formatTime = (isoDate) => {
+  if (!isoDate) return null;
+  
+  const date = new Date(isoDate);
+  if (isNaN(date.getTime())) return null; // Check for invalid dates
+
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+};

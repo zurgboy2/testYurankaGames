@@ -121,6 +121,24 @@ button:hover {
     background: darkred;
 }
 
+.boardgames-subtitle {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.8rem;
+    color: #E5E7EB;
+    margin-top: 3rem;
+    margin-left: 1.5rem;
+  }
+
+  .forrent-subtitle {
+    font-size: 1rem;
+    text-align: left;
+    color: #E5E7EB;
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+  }
+
 @media (max-width: 768px) {
     .container {
         padding: 3rem 1rem;

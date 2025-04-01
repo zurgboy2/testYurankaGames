@@ -61,7 +61,9 @@ useEffect(() => {
 
       {/* Logo on the left side */}
       <div className="logo-container">
+      <Link to="/">
         <img src={logo} alt="YurankaGames Logo" className="logo" />
+        </Link>
       </div>
 
       {/* Navigation Links inside an oval */}

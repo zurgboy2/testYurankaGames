@@ -28,7 +28,7 @@ const ReservationForm = () => {
   const [checkoutUrl, setCheckoutUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false); // State for loading
   const reservationOptionsRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
       const storedName = sessionStorage.getItem("name") || "";
@@ -176,11 +176,7 @@ const ReservationForm = () => {
 
   const dateInputRef = useRef(null);
 
-  const openDatePicker = () => {
-    if (dateInputRef.current) {
-      dateInputRef.current.click(); // Opens the date picker in supported browsers
-    }
-  };
+
 
   return (
     <div className="reservations-container">
@@ -196,26 +192,25 @@ const ReservationForm = () => {
           <div className="reservation-form-group">
             <label>Select Date</label>
             <div className="input-container">
-                <DatePicker
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  format="YYYY-MM-DD"
-                  className="mui-datepicker"
-                  slotProps={{
-                    textField: { variant: "outlined", fullWidth: true, InputProps: {
-                      style: {
-                        backgroundColor: "#E5E7EB", // White background
-                        color: "#333", 
-                        border: "1px solid #EC4527"
-                      },
-                    }, 
-                  },
-                  components: {
-                    OpenPickerIcon: () => null, // Hide the calendar icon
-                  },
-                  }}
-                />
-           <FaCalendarAlt className="calendar-icon" onClick={openDatePicker}/>
+            <DatePicker
+            
+            value={selectedDate}
+            onChange={handleDateChange}
+             slotProps={{
+        textField: {
+          variant: "outlined",
+          fullWidth: true,
+          InputProps: {
+            style: {
+              backgroundColor: "#E5E7EB",  // White background
+              color: "#333", 
+              border: "1px solid #EC4527",  // Red border
+            },
+          },
+          placeholder: "Select a date",  // Placeholder text
+        },
+      }}
+          />
 
             </div>
             {error && <p className="error-message">{error}</p>}

@@ -253,10 +253,7 @@ select option {
     /* Adds spacing between the text and input */
 }
 
-.labelquantitypicker {
-    font-size: 1.3rem !important;
-    color: #DE2323 !important;
-}
+
 
 
 .quantity-picker {
@@ -294,7 +291,7 @@ select option {
 }
 
 .reservation-input-group input {
-    width: 100%;
+        width: 100%;
         padding: 0.8rem 2rem 0.8rem 0.5rem;
         font-size: 1rem;
         border-radius: 5px;

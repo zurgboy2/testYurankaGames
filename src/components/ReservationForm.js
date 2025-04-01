@@ -6,11 +6,13 @@ import smallTables from "../assets/smallTables.jpg";
 import couchSpaces from "../assets/couchSpaces.jpg";
 import {  makeRegistrationRequestCall,makeRequestCall } from "../api/api";
 import { useState, useEffect, useRef } from "react";
-
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const ReservationForm = () => {
 
-  const [selectedDate, setSelectedDate] = useState("");
   const [error, setError] = useState("");
   const [timeSlots, setTimeSlots] = useState([]);
   const [startTime, setStartTime] = useState("");
@@ -26,7 +28,7 @@ const ReservationForm = () => {
   const [checkoutUrl, setCheckoutUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false); // State for loading
   const reservationOptionsRef = useRef(null);
-
+  const [selectedDate, setSelectedDate] = useState(dayjs());
 
     useEffect(() => {
       const storedName = sessionStorage.getItem("name") || "";
@@ -38,14 +40,14 @@ const ReservationForm = () => {
       setEmail(storedEmail);
     }, []);
 
-  const handleDateChange = async (e) => {
+  const handleDateChange = async (newValue) => {
     setTimeSlots("");
-    const date = e.target.value;
-    setSelectedDate(date);
+    setSelectedDate(dayjs(newValue));
 
-    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    const today = dayjs().startOf('day'); // Get today's date as a dayjs object for comparison
 
-    if (date < today) {
+    // Compare the new date with today's date (ensure both are dayjs objects for proper comparison)
+    if (dayjs(newValue).isBefore(today)) {
       setError("Please select a future date.");
       return;
     }
@@ -54,7 +56,7 @@ const ReservationForm = () => {
 
     setIsLoading(true);
     try {
-      const slots = await makeRegistrationRequestCall('registration_script',"getTimeSlots", { date });
+      const slots = await makeRegistrationRequestCall('registration_script',"getTimeSlots", {  date: newValue.format("YYYY-MM-DD") });
       console.log("Available slots:", slots); // Handle slots (e.g., update state)
       setTimeSlots(slots);
       setStartTime(""); // Reset selected start time
@@ -172,6 +174,14 @@ const ReservationForm = () => {
     }
   }, [spaces]); 
 
+  const dateInputRef = useRef(null);
+
+  const openDatePicker = () => {
+    if (dateInputRef.current) {
+      dateInputRef.current.click(); // Opens the date picker in supported browsers
+    }
+  };
+
   return (
     <div className="reservations-container">
       {/* Title */}
@@ -181,20 +191,44 @@ const ReservationForm = () => {
         {/* Left Side - Reservation Form */}
         <div className="reservation-form">
           {/* Select Date */}
-          <div className="form-group">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+          <div className="reservation-form-group">
             <label>Select Date</label>
             <div className="input-container">
-              <input type="date" value={selectedDate} onChange={handleDateChange}/>
+                <DatePicker
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  format="YYYY-MM-DD"
+                  className="mui-datepicker"
+                  slotProps={{
+                    textField: { variant: "outlined", fullWidth: true, InputProps: {
+                      style: {
+                        backgroundColor: "#E5E7EB", // White background
+                        color: "#333", 
+                        border: "1px solid #EC4527"
+                      },
+                    }, 
+                  },
+                  components: {
+                    OpenPickerIcon: () => null, // Hide the calendar icon
+                  },
+                  }}
+                />
+           <FaCalendarAlt className="calendar-icon" onClick={openDatePicker}/>
+
             </div>
             {error && <p className="error-message">{error}</p>}
 
           </div>
+          </LocalizationProvider>
+
 
 {timeSlots.length > 0 && (
           <>
 
           {/* Start Time */}
-          <div className="form-group">
+          <div className="reservation-form-group">
             <label>Select Start Time</label>
             <div className="time-grid">
             {timeSlots.map((slot) => (
@@ -206,11 +240,11 @@ const ReservationForm = () => {
                 {slot}
               </button>
             ))}
-          </div>
+            </div>
           </div>
 
           {/* End Time */}
-          <div className="form-group">
+          <div className="reservation-form-group">
             <label>Select End Time</label>
             <div className="time-grid">
             {timeSlots
@@ -297,11 +331,11 @@ const ReservationForm = () => {
     </div>
 
     <div class="reservation-form2">
-        <div class="input-group">
+        <div class="reservation-input-group">
             <label for="name">Name</label>
             <input type="text" id="name" placeholder="Enter name"  value={name}  onChange={(e) => setName(e.target.value)}/>
         </div>
-        <div class="input-group">
+        <div class="reservation-input-group">
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="Enter email" value={email}
           onChange={(e) => setEmail(e.target.value)}/>
@@ -348,8 +382,11 @@ const LoadingModal = ({ isLoading }) => {
   return (
     isLoading && (
       <div className="modal-overlay">
-        <div className="modal-content">
-          <p className="loading-message">Loading...</p>
+        <div className="resevations-modal-content">
+          <div className="loading-container">
+            <div className="spinner"></div>
+            <p className="loading-message">Loading...</p>
+          </div>
         </div>
       </div>
     )

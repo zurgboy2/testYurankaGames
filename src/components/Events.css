@@ -48,6 +48,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    max-width: 400px;
 }
 
 /* Card image centered */
@@ -231,15 +232,25 @@
 }
 
 .form-group label {
+    color: #E5E7EB;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    text-align: left;
 }
 
 .form-group input {
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 550px;
+    width: 80%;
+        padding: 0.8rem 2rem 0.8rem 0.5rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #EC4527;
+        outline: none;
+        background: linear-gradient(135deg, #f0f4f8, #e0e7ff); /* Gradient background */
+        color: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: all 0.3s ease;
+        margin-left: 0.6rem; 
+
 }
 
 /* Disclaimer Section */
@@ -290,10 +301,16 @@
 
 @media (max-width: 768px) {
     .events-title {
-        font-size: 1.3rem;
-        margin-left: 1rem;
+        font-size: 1.6rem;
+        margin-left: 0rem;
+        text-align: center;
     }
 
+    .events-subtitle{
+        margin-left: 1rem;
+        font-size: 1.4rem;
+
+    }
     .tournament-cards-container {
         display: flex;
         flex-wrap: nowrap;
@@ -304,6 +321,7 @@
         -ms-overflow-style: none;
         /* Hide scrollbar for IE/Edge */
         scrollbar-width: none;
+        margin-top: 0rem;
         /* Hide scrollbar for Firefox */
     }
 

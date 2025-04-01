@@ -31,12 +31,12 @@
 }
 
 /* Form Group */
-.form-group {
+.reservation-form-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     color: #E5E7EB;
-    margin-left: 2.5rem;
+    margin-left: 0.5rem;
 }
 
 /* Input Container with Icons */
@@ -46,17 +46,45 @@
     position: relative;
 }
 
-input {
-    width: 100%;
-    padding: 0.7rem;
-    padding-right: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.mui-datepicker .MuiInputAdornment-root {
+    display: none !important;
+  }
+
+.reservation-date-picker {
+    width: 70%;
+    padding: 0.8rem 2.5rem 0.8rem 2.5rem;
     font-size: 1rem;
-    background: linear-gradient(180deg, #4D4D4D 0%, #4C3838 100%);
-    transition: 0.3s;
-    color: #E5E7EB;
+    border-radius: 5px;
+    border: 1px solid #EC4527;
+    outline: none;
+    background: linear-gradient(135deg, #f0f4f8, #e0e7ff); /* Gradient background */
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease; /* Subtle shadow */
+    appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
 }
+
+.reservation-date-picker::-webkit-calendar-picker-indicator,
+.reservation-date-picker::-webkit-inner-spin-button,
+.reservation-date-picker::-webkit-clear-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+
+input:focus{
+    border-color: #EC4527; /* Blue border on focus */
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+.calendar-icon {
+    position: absolute;
+    right: 2rem;
+    color: #EC4527;
+    pointer-events: none; /* Prevents clicking */
+  }
 
 select {
     width: 100%;
@@ -252,26 +280,31 @@ select option {
     margin-bottom: 2rem;
 }
 
-.input-group {
+.reservation-input-group {
     display: flex;
     flex-direction: column;
     width: 300px;
 }
 
-.input-group label {
+.reservation-input-group label {
     color: #E5E7EB;
     font-size: 1rem;
     margin-bottom: 0.5rem;
     text-align: left;
 }
 
-.input-group input {
-    padding: 0.7rem;
-    border: 1px solid #9CA3AF;
-    border-radius: 5px;
-    color: #E5E7EB;
-    background: linear-gradient(180deg, #4D4D4D 0%, #4C3838 100%);
-    transition: 0.3s;
+.reservation-input-group input {
+    width: 100%;
+        padding: 0.8rem 2rem 0.8rem 0.5rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #EC4527;
+        outline: none;
+        background: linear-gradient(135deg, #f0f4f8, #e0e7ff); /* Gradient background */
+        color: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: all 0.3s ease;
+        margin-left: 0.6rem; 
 
 }
 
@@ -318,6 +351,11 @@ select option {
     font-weight: bold;
 }
 
+.mui-datepicker {
+    width: 100%;
+  }
+  
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .reservation-options {
@@ -327,10 +365,9 @@ select option {
 
     .reservation-form2 {
         flex-direction: column;
-        align-items: center;
     }
 
-    .input-group {
+    .reservation-input-group {
         width: 100%;
         max-width: 300px;
     }
@@ -344,6 +381,7 @@ select option {
     .reservations-title {
         font-size: 1.3rem;
         text-align: center;
+        margin-left: 0rem;
     }
 
     .reservations-content {
@@ -433,21 +471,31 @@ select option {
         gap: 1rem
     }
 
-    .input-group label {
+    .reservation-input-group label {
         font-size: 1rem;
         margin-bottom: 0.5rem;
+        margin-left: 0.6rem; 
+
 
     }
 
-    .input-group input {
-        padding: 0.7rem;
-        border: 1px solid #9CA3AF;
+    .reservation-input-group input {
+        width: 100%;
+        padding: 0.8rem 2rem 0.8rem 0.5rem;
+        font-size: 1rem;
         border-radius: 5px;
-        color: #E5E7EB;
-        background: linear-gradient(180deg, #4D4D4D 0%, #4C3838 100%);
-        transition: 0.3s;
-        max-width: 90%;
-        margin: 0rem;
+        border: 1px solid #EC4527;
+        outline: none;
+        background: linear-gradient(135deg, #f0f4f8, #e0e7ff); /* Gradient background */
+        color: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: all 0.3s ease;
+        margin-left: 0.6rem; 
+    }
+
+    .reservation-input-group input:focus {
+        border-color: #EC4527; /* Blue border on focus */
+        box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3); 
     }
 
     .submit-button {
@@ -465,19 +513,55 @@ select option {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #2A2727;
     z-index: 1000;
 }
 
 /* Modal Box */
-.modal-content {
-    background-color: black;
-    padding: 2rem;
+.resevations-modal-content {
+    background-color: #2A2727;
+    padding: 0rem;
     border-radius: 8px;
     width: 300px;
     text-align: center;
     position: relative;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease-in-out;
+    width: 250px;
+}
+
+/* Loading Container */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🔹 Spinner */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid rgba(0, 0, 0, 0.2);
+    border-top: 6px solid #EC4527;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Loading Message */
+.loading-message {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: white;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /* Close Button */

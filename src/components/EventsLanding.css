@@ -151,6 +151,14 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
 
+    .section-title {
+        text-align: left;
+        margin-bottom: 1.5rem;
+        color: #EAE5E5;
+        margin-left: 1rem;
+        font-size: 1.8rem;
+    }
+
     .horizontal-events-section {
         padding: 2rem 1rem;
         /* Reduce padding for mobile */

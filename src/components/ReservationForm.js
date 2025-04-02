@@ -43,6 +43,7 @@ const ReservationForm = () => {
   const handleDateChange = async (newValue) => {
     setTimeSlots("");
     setSelectedDate(dayjs(newValue));
+    console.log("chosen date"+dayjs(newValue).format("YYYY-MM-DD"));
 
     const today = dayjs().startOf('day'); // Get today's date as a dayjs object for comparison
 
@@ -121,7 +122,7 @@ const ReservationForm = () => {
     {type: "Couch Spaces",chosenAmount: parseInt(couchSpacesSelected)});
 
     const reservationDetails = {
-      date: selectedDate,
+      date: selectedDate.format("YYYY-MM-DD"),
       startTime,
       endTime,
       name,
@@ -142,7 +143,7 @@ const ReservationForm = () => {
        // const message = `Dear ${name},<br>Your reservation for ${selectedDate} from ${startTime} to ${endTime} has been successfully submitted! Please click the link below for payment.`;
         //showPopup(message, response.checkoutUrl);
         //console.log(message);
-        const dynamicMessage = `Dear ${name},\nYour reservation for ${selectedDate} from ${startTime} to ${endTime} has been successfully submitted! Please click the link below for payment.`;
+        const dynamicMessage = `Dear ${name},\nYour reservation for ${selectedDate.format("ddd, DD MMM YYYY")} from ${startTime} to ${endTime} has been successfully submitted! Please click the link below for payment.`;
       setMessage(dynamicMessage);
       setCheckoutUrl(response.checkoutUrl);
       setShowPopup(true);

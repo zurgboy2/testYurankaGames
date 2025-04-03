@@ -58,12 +58,23 @@ const ReservationForm = () => {
 
     setIsLoading(true);
     try {
+
+      const currentTime = new Date(); // Get current time
+      const selectedDate = newValue.format("YYYY-MM-DD")
+
       const slots = await makeRegistrationRequestCall('registration_script',"getTimeSlots", {  date: newValue.format("YYYY-MM-DD") });
       console.log("Available slots:", slots); // Handle slots (e.g., update state)
-      setTimeSlots(slots);
+      
+      const filteredSlots = slots.filter(slot => {
+        const slotDateTime = new Date(`${selectedDate}T${slot}`); // Convert slot to Date object
+        return slotDateTime >= currentTime;
+    });
+      setTimeSlots(filteredSlots);
       setStartTime(""); // Reset selected start time
       setEndTime("");
       setIsLoading(false);
+
+
     } catch (error) {
       console.error("Error fetching time slots:", error);
       setIsLoading(false);
@@ -129,7 +140,7 @@ const ReservationForm = () => {
         setShowPopup(true);
         return;
     }
-    
+
     if (!name || !email) {
         setMessage("Please enter both name and email to proceed with the reservation.");
         setCheckoutUrl('');

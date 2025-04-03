@@ -29,6 +29,7 @@ const ReservationForm = () => {
   const [isLoading, setIsLoading] = useState(false); // State for loading
   const reservationOptionsRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isConfirmationStep, setIsConfirmationStep] = useState(false);
 
     useEffect(() => {
       const storedName = sessionStorage.getItem("name") || "";
@@ -113,58 +114,73 @@ const ReservationForm = () => {
   };
 
   const handleReservationSubmit = async () => {
+    // Validation checks
+    if (!name || !email) {
+        setMessage("Please enter both name and email to proceed with the reservation.");
+        setCheckoutUrl('');
+        setShowPopup(true);
+        return;
+    }
+
+    if (parseInt(bigTablesSelected) === 0 && 
+        parseInt(smallTablesSelected) === 0 && 
+        parseInt(couchSpacesSelected) === 0) {
+        setMessage("Please select at least one reservation option (Big Tables, Small Tables, or Couch Spaces).");
+        setCheckoutUrl('');
+        setShowPopup(true);
+        return;
+    }
+
+    // If validation passes, show confirmation popup
+    const reservationDetails = `Dear ${name},\nYour reservation details are as follows:\n${selectedDate.format("ddd, DD MMM YYYY")} from ${startTime} to ${endTime}\nBig Tables: ${bigTablesSelected}\nSmall Tables: ${smallTablesSelected}\nCouch Spaces: ${couchSpacesSelected}\n\nSubmit reservation and you will be directed to the checkout for payment. Make the payment to confirm your reservation.`;
+    
+    setMessage(reservationDetails);
+    setIsConfirmationStep(true);  // New state to track if we're showing confirmation
+    setShowPopup(true);
+  };
+
+  // New function to handle the actual submission
+  const handleConfirmedSubmission = async () => {
     var username = sessionStorage.getItem('username');
     var googleToken = sessionStorage.getItem('googleToken');
 
     var availabilityData = [];
-    availabilityData.push({type: "Big Tables",chosenAmount: parseInt(bigTablesSelected)},
-    {type: "Small Tables",chosenAmount: parseInt(smallTablesSelected)},
-    {type: "Couch Spaces",chosenAmount: parseInt(couchSpacesSelected)});
+    availabilityData.push(
+        {type: "Big Tables", chosenAmount: parseInt(bigTablesSelected)},
+        {type: "Small Tables", chosenAmount: parseInt(smallTablesSelected)},
+        {type: "Couch Spaces", chosenAmount: parseInt(couchSpacesSelected)}
+    );
 
     const reservationDetails = {
-      date: selectedDate.format("YYYY-MM-DD"),
-      startTime,
-      endTime,
-      name,
-      email,
-      username,
-      googleToken,
-      availability: availabilityData,
+        date: selectedDate.format("YYYY-MM-DD"),
+        startTime,
+        endTime,
+        name,
+        email,
+        username,
+        googleToken,
+        availability: availabilityData,
     };
   
     console.log(reservationDetails);
   
     setIsLoading(true);
     try {
-      const response = await makeRegistrationRequestCall("registration_script","submitReservationDetails", { reservationDetails });
-      setIsLoading(false);
+        const response = await makeRegistrationRequestCall("registration_script", "submitReservationDetails", { reservationDetails });
+        setIsLoading(false);
 
-      if (response.checkoutUrl) {
-       // const message = `Dear ${name},<br>Your reservation for ${selectedDate} from ${startTime} to ${endTime} has been successfully submitted! Please click the link below for payment.`;
-        //showPopup(message, response.checkoutUrl);
-        //console.log(message);
-        const dynamicMessage = `Dear ${name},\nYour reservation for ${selectedDate.format("ddd, DD MMM YYYY")} from ${startTime} to ${endTime} has been successfully submitted! Please click the link below for payment.`;
-      setMessage(dynamicMessage);
-      setCheckoutUrl(response.checkoutUrl);
-      setShowPopup(true);
-      } else {
-        //showPopup(response.message || "It seems there was an error. Did you happen to choose any options?");
-        const errorMessage = response.message || "It seems there was an error. Did you select any options?";
-        setMessage(errorMessage);
+        if (response.checkoutUrl) {
+            window.location.href = response.checkoutUrl;  // Direct redirect
+        } else {
+            setMessage(response.message || "An error occurred while processing your reservation.");
+            setCheckoutUrl('');
+            setShowPopup(true);
+        }
+    } catch (error) {
+        console.error("Error submitting reservation:", error);
+        setMessage("There was a problem submitting your reservation. Please try again.");
         setCheckoutUrl('');
         setShowPopup(true);
-      }
-    } catch (error) {
-      console.error("Error submitting reservation:", error);
-      //showPopup("There was a problem submitting your reservation. Please try again. Make sure to reserve tables or couch spaces.");
-      console.log(error);
-      setMessage("There was a problem submitting your reservation. Please try again. Make sure to reserve tables or couch spaces.");
-      setCheckoutUrl('');
-      setShowPopup(true);
-
-    } finally {
-     // document.querySelector(".submit-button").disabled = false; // Re-enable the button
-     // hideLoading();
     }
   };
 
@@ -338,40 +354,55 @@ const ReservationForm = () => {
         </div>
     </div>
  
-    <button class="submit-button" onClick={handleReservationSubmit}>Submit Reservation</button>
+    <button className="submit-button" onClick={handleReservationSubmit}>
+        Submit Reservation
+    </button>
 
-{showPopup && <ConfirmationPopup message={message} checkoutUrl={checkoutUrl} onClose={() => setShowPopup(false)} />}
-<LoadingModal isLoading={isLoading} />
+    {showPopup && (
+        <ConfirmationPopup 
+            message={message} 
+            isConfirmationStep={isConfirmationStep}
+            onClose={() => {
+                setShowPopup(false);
+                setIsConfirmationStep(false);
+            }}
+            onSubmit={handleConfirmedSubmission}
+        />
+    )}
+    <LoadingModal isLoading={isLoading} />
     </div>
     
   );
 };
 
-const ConfirmationPopup = ({ message, checkoutUrl, onClose }) => {
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="close-btn" onClick={onClose}>
-          &times;
-        </button>
+const ConfirmationPopup = ({ message, isConfirmationStep, onClose, onSubmit }) => {
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <button className="close-btn" onClick={onClose}>
+                    &times;
+                </button>
 
-        {/* Render message as JSX instead of using dangerouslySetInnerHTML */}
-        <p className="modal-message">
-          {message}
-        </p>
+                <p className="modal-message">
+                    {message.split('\n').map((line, index) => (
+                        <React.Fragment key={index}>
+                            {line}
+                            <br />
+                        </React.Fragment>
+                    ))}
+                </p>
 
-        {checkoutUrl && (
-          <button 
-            className="checkout-btn" 
-            onClick={() => window.open(checkoutUrl, "_blank")}
-          >
-            Proceed to Checkout
-          </button>
-        )}
-        
-      </div>
-    </div>
-  );
+                {isConfirmationStep && (
+                    <button 
+                        className="submit-reservationpage-btn" 
+                        onClick={onSubmit}
+                    >
+                        Submit Reservation
+                    </button>
+                )}
+            </div>
+        </div>
+    );
 };
 
 const LoadingModal = ({ isLoading }) => {

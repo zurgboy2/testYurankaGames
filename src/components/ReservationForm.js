@@ -115,6 +115,21 @@ const ReservationForm = () => {
 
   const handleReservationSubmit = async () => {
     // Validation checks
+
+    if (!selectedDate) {
+      setMessage("Please select the desired date for your reservation.");
+      setCheckoutUrl('');
+      setShowPopup(true);
+      return;
+    }
+
+    if (!startTime || !endTime) {
+        setMessage("Please select both start time and end time for your reservation.");
+        setCheckoutUrl('');
+        setShowPopup(true);
+        return;
+    }
+    
     if (!name || !email) {
         setMessage("Please enter both name and email to proceed with the reservation.");
         setCheckoutUrl('');

@@ -69,10 +69,18 @@ const BoardGamesSection = () => {
     return (
         <div className="container">
             <h1 className='board-games-title' >Board Games</h1>
+            <h3 className='board-games-caption'> Browse our wide range of board games available for purchase or rent and reserve a Big or Small Table to play!
+            </h3>
+            <h3 className='board-games-caption'> 
+            A Big Table seats 6 for board games or 4 for TCGs.            </h3>
+            <h3 className='board-games-caption'>
+            A Small Table seats 4 for board games or 2 for TCGs.
+            </h3>
             <div className="flex">
-                <button onClick={viewAll}>View All Board Games</button>
                 <button onClick={handleReserveGame}>Reserve a Table</button>
+
             </div>
+            
             <div className="boardsearch-bar-container">
             <input 
             type="text" 
@@ -83,6 +91,12 @@ const BoardGamesSection = () => {
             />
             <FaSearch className="search-icon" />
             </div>
+
+            <div className="flex">
+                <button onClick={viewAll}>View All Board Games</button>
+
+            </div>
+
             {loading && (
                 <div className="loading-screen">
                     <div className="loading-container">
@@ -104,7 +118,7 @@ const BoardGamesSection = () => {
                                     <img src={game.imageUrl === "No Image" ? noposter : game.imageUrl} alt="Game poster" />
                                     <h2>{game.name}</h2>
                                     <p>{game.description}</p>
-                                    <p><strong>Price:</strong> ${game.price}</p>
+                                    <p><strong>Price:</strong> € {game.price}</p>
                                     <p><strong>Players:</strong> {game.playerCount}</p>
                                     <p><strong>Expansion:</strong> {game.expansion}</p>
                                     <p><strong>Language:</strong> {game.language}</p>

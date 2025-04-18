@@ -56,8 +56,6 @@
     transition: color 0.3s ease-in-out;
 }
 
-
-
 .nav-links a:hover {
     color: red;
 }
@@ -94,14 +92,12 @@
     white-space: nowrap;
 }
 
-
 .user-profile {
     display: flex;
     align-items: center;
     cursor: pointer;
     gap: 10px;
     margin-right: 4rem;
-
 }
 
 .avatar {
@@ -129,42 +125,68 @@
     display: none;
 }
 
-/* Responsive: Mobile */
-/* @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 55px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #0E0C0C;
-        width: 50%;
-        text-align: center;
-        padding: 0.5rem 0;
-    }
 
-    .nav-links.active {
-        display: flex;
-    }
 
-    .menu-icon {
-        display: block;
-        margin-left: auto;
-        font-size: 1.8rem;
-        color: #EF4444;
-        cursor: pointer;
-        position: absolute;
-        right: 3rem;
-    }
+/* Events Dropdown Styles */
+.events-dropdown {
+    position: relative;
+}
 
-    .auth-buttons {
-        display: none;
-    }
-} */
+.events-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
 
+.dropdown-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: #EF4444;
+    margin-top: 0rem;
+    padding-top: 0.2rem;
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+.events-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #0E0C0C;
+    padding: 0.5rem;
+    border-radius: 5px;
+    display: none;
+    min-width: 150px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.events-dropdown-menu.active {
+    display: block;
+}
+
+.events-dropdown-menu li {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+}
+
+.events-dropdown-menu a {
+    color: #E5E7EB;
+    text-decoration: none;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.events-dropdown-menu a:hover {
+    color: #EF4444;
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
-
     .navbar {
         max-width: 100%;
     }
@@ -215,7 +237,6 @@
         text-decoration: none;
     }
 
-
     .mobile-auth {
         display: block;
         width: 100%;
@@ -264,5 +285,29 @@
 
     .user-profile {
         display: none;
+    }
+
+    .events-dropdown-menu {
+        position: static;
+        background: transparent;
+        padding-left: 1.5rem;
+        display: block;
+        box-shadow: none;
+    }
+
+    .events-dropdown-menu li {
+        padding: 0.5rem 0;
+    }
+
+    .events-dropdown-menu a {
+        font-size: 1.1rem;
+    }
+
+    .dropdown-arrow {
+        display: none;
+    }
+
+    .events-dropdown-trigger {
+        pointer-events: none;
     }
 }

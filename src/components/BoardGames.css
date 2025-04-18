@@ -14,10 +14,28 @@
     margin-left: 1.5rem;
   }
 
+  .board-games-caption {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    color: #E5E7EB;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-weight: normal;
+  }
+
 .flex {
     display: flex;
     gap: 16px;
     margin: 16px 0;
+    flex-direction: column; 
+    width: 100%;
+    max-width: 400px;
+}
+
+.flex button{
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
 }
 
 .grid {
@@ -30,6 +48,7 @@
     width: 100%;
     max-width: 400px;
     margin: 1rem 0rem;
+    margin-top: 3rem;
 }
 
 .boardsearch-bar-container input {
@@ -215,9 +234,21 @@ button:hover {
 }
 
 @media (max-width: 768px) {
+  .flex {
+width: 90%;
+margin-left: 1rem;
+  }
+}
+@media (max-width: 768px) {
+    
+    .board-games-caption{
+        font-size: 0.9rem;
+    }
+
     .boardsearch-bar-container {
         max-width: 80%; /* Full width on mobile */
         margin: 0.5rem 0; /* Reduced margin on mobile */
+        margin-top: 2rem;
     }
 
     .boardsearch-bar-container input {

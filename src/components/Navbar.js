@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import logo from "../assets/logo.png"; // Make sure to replace this with your actual logo path
 import { Link,useNavigate } from "react-router-dom";
 import avatarImg from "../assets/logo.png"; 
@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [eventsDropdownOpen, setEventsDropdownOpen] = useState(false);
   const username = sessionStorage.getItem("username");
 
 //   useEffect(() => {
@@ -47,6 +48,21 @@ useEffect(() => {
 
   // Add event listener
 
+  const toggleEventsDropdown = (e) => {
+    e.stopPropagation();
+    setEventsDropdownOpen(!eventsDropdownOpen);
+  };
+
+  const handleEventsHover = (e) => {
+    e.stopPropagation();
+    setEventsDropdownOpen(true);
+  };
+
+  const handleEventsLeave = (e) => {
+    e.stopPropagation();
+    setEventsDropdownOpen(false);
+  };
+
   return (
     <nav className="navbar" >
 
@@ -70,7 +86,18 @@ useEffect(() => {
       <ul className={menuOpen ? "nav-links active" : "nav-links" } >
       <li><Link to="/" >Home</Link></li>
       <li><a href="https://store.yuranka.com">Store</a></li>
-      <li><Link to="/events" >Events</Link></li>
+      <li className="events-dropdown" 
+            onMouseEnter={handleEventsHover}
+            onMouseLeave={handleEventsLeave}>
+        <div className="events-dropdown-trigger">
+          <Link to="/events">Events</Link>
+          <FaChevronDown className={`dropdown-arrow ${eventsDropdownOpen ? 'open' : ''}`} />
+        </div>
+        <ul className={`events-dropdown-menu ${eventsDropdownOpen ? 'active' : ''}`}>
+          <li><Link to="/events">Main Events</Link></li>
+          <li><Link to="/minicons">Minicons</Link></li>
+        </ul>
+      </li>
       <li><Link to="/reservations" >Reservations</Link></li>
         <li><a href="#boardgames">Board Games</a></li>
         <li><a href="#videogames">Video Games</a></li>

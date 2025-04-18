@@ -179,7 +179,7 @@ p.toggle-text {
         border-radius: 5px;
         padding: 0.2rem 1rem;
         width: 115%;
-        max-width: none;
+        max-width: 100%;
         min-width: 150px;
         position: relative;
         box-sizing: border-box;

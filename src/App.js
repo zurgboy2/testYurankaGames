@@ -9,6 +9,7 @@ import LoginAndSignupPage from './pages/Login&SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import VideoGamesPage from './pages/VideoGamesPage';
 import BoardGamesPage from './pages/BoardGamesPage';
+import MiniConsPage from './pages/MiniConsPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* <Route path="/store" element={<Store />} /> */}
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/minicons" element={<MiniConsPage/>}/>
         <Route path="/reservations" element={<ReservationsPage />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/login&signup" element={<LoginAndSignupPage/>}/>

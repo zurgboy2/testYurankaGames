@@ -37,7 +37,6 @@ const BoardGamesSection = () => {
             setGames(allGames);
             setForSaleGames(saleGames);
             setForRentGames(rentGames);
-            console.log(response.games);
         } catch (error) {
             console.error("Error fetching board games:", error);
         } finally {
@@ -68,33 +67,38 @@ const BoardGamesSection = () => {
     );
     return (
         <div className="container">
-            <h1 className='board-games-title' >Board Games</h1>
+             <h1 className='board-games-title' >Board Games</h1>
+
+            <div className="responsive-align">
+
             <h3 className='board-games-caption'> Browse our wide range of board games available for purchase or rent and reserve a Big or Small Table to play!
             </h3>
             <h3 className='board-games-caption'> 
-            A Big Table seats 6 for board games or 4 for TCGs.            </h3>
-            <h3 className='board-games-caption'>
-            A Small Table seats 4 for board games or 2 for TCGs.
+            A Big Table seats 6 for board games or 4 for TCGs. A Small Table seats 4 for board games or 2 for TCGs.
             </h3>
+
             <div className="flex">
                 <button onClick={handleReserveGame}>Reserve a Table</button>
 
             </div>
-            
+
+            <div className="search-and-button-wrapper">
             <div className="boardsearch-bar-container">
             <input 
             type="text" 
             placeholder="Search for a game..." 
             value={searchQuery} 
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-bar"
+            className="boardsearch-bar-container-input"
             />
             <FaSearch className="search-icon" />
             </div>
 
-            <div className="flex">
+            <div className="flex2">
                 <button onClick={viewAll}>View All Board Games</button>
 
+            </div>
+            </div>
             </div>
 
             {loading && (

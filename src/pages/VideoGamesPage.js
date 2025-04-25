@@ -11,6 +11,8 @@ import AboutYuranka from '../components/AboutYuranka';
 import EventsSection from '../components/Events';
 import React, { useEffect } from 'react';
 import VideoGamesSection from '../components/VideoGames';
+import OrientationWarning from '../components/OrientationWarning'; 
+
 
 function VideoGamesPage() {
     useEffect(() => {
@@ -19,6 +21,7 @@ function VideoGamesPage() {
 
     return (
     <div className="Home">
+      <OrientationWarning />
       <Navbar/>
       <VideoGamesSection/>
       <Footer/>

@@ -12,21 +12,6 @@ const Navbar = () => {
   const [eventsDropdownOpen, setEventsDropdownOpen] = useState(false);
   const username = sessionStorage.getItem("username");
 
-//   useEffect(() => {
-//     const handleClickOutside = (event) => {
-//         // Prevent closing when clicking on the menu button itself
-//         if (event.target.closest(".menu-icon")) {
-//             return;
-//         }
-
-//         if (menuOpen && !event.target.closest(".nav-links")) {
-//             setMenuOpen(false);
-//         }
-//     };
-
-//     document.addEventListener("click", handleClickOutside);
-//     return () => document.removeEventListener("click", handleClickOutside);
-// }, [menuOpen]);
 
 useEffect(() => {
   const handleClickOutside = (event) => {

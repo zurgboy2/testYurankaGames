@@ -44,8 +44,6 @@ const ReservationForm = () => {
   const handleDateChange = async (newValue) => {
     setTimeSlots("");
     setSelectedDate(dayjs(newValue));
-    console.log("chosen date"+dayjs(newValue).format("YYYY-MM-DD"));
-
     const today = dayjs().startOf('day'); // Get today's date as a dayjs object for comparison
 
     // Compare the new date with today's date (ensure both are dayjs objects for proper comparison)
@@ -63,7 +61,7 @@ const ReservationForm = () => {
       const selectedDate = newValue.format("YYYY-MM-DD")
 
       const slots = await makeRegistrationRequestCall('registration_script',"getTimeSlots", {  date: newValue.format("YYYY-MM-DD") });
-      console.log("Available slots:", slots); // Handle slots (e.g., update state)
+       // Handle slots (e.g., update state)
       
       const filteredSlots = slots.filter(slot => {
         const slotDateTime = new Date(`${selectedDate}T${slot}`); // Convert slot to Date object
@@ -98,11 +96,11 @@ const ReservationForm = () => {
         endTime: slot 
       });
 
-      console.log("Capacity Data:", capacities);
+      
       setSpaces(capacities);
       setIsLoading(false);
 
-      console.log(spaces["Big Tables"].count);
+      
 
     } catch (error) {
       console.error("Error checking unavailability:", error);
@@ -188,7 +186,7 @@ const ReservationForm = () => {
         availability: availabilityData,
     };
   
-    console.log(reservationDetails);
+    
   
     setIsLoading(true);
     try {

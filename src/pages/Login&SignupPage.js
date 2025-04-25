@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import LoginAndSignup from '../components/Login&Signup';
 import Footer from '../components/Footer';
+import './Home.css';
+import OrientationWarning from '../components/OrientationWarning'; 
 
 function LoginAndSignupPage(){
 
@@ -11,6 +13,7 @@ function LoginAndSignupPage(){
 
           return(
             <div className="Home">
+                <OrientationWarning />
                 <Navbar/>
                 <LoginAndSignup/>
                 <Footer/>

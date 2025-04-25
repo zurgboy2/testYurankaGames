@@ -16,7 +16,7 @@ const EventsLandingPageSection =() =>{
           const tournamentsArray = JSON.parse(tournamentData.result);
           setTournaments(tournamentsArray);
           setLoading(false);
-          console.log(tournamentsArray);
+          
         })
         .catch((error) => {
           console.error("Error loading tournaments:", error);

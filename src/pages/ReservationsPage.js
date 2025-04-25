@@ -10,6 +10,7 @@ import ReservationForm from '../components/ReservationForm';
 import AboutYuranka from '../components/AboutYuranka';
 import EventsSection from '../components/Events';
 import React, { useEffect } from 'react';
+import OrientationWarning from '../components/OrientationWarning'; 
 
 function ReservationsPage() {
     useEffect(() => {
@@ -18,6 +19,7 @@ function ReservationsPage() {
 
     return (
     <div className="Home">
+      <OrientationWarning />
       <Navbar/>
       <ReservationForm/>
       <Footer/>

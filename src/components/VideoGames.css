@@ -62,8 +62,11 @@
 }
 
 .console-section {
-  margin-bottom: 20px;
-}
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;}
 
 .console-section h3 {
  
@@ -95,11 +98,11 @@
 
 .games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-top: 10px;
-  padding-right: 2rem;
-  padding-left: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  justify-content: center; /* 👈 Center grid on larger screens */
+  width: 100%;
+  max-width: 1000px; 
 
 }
 
@@ -135,6 +138,13 @@
   align-items: left;
 }
 
+.filtered-games {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;}
+
 .filtered-games h3 {
  
   color: #E5E7EB;
@@ -166,13 +176,11 @@
 
 .search-bar-container {
   position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin: 2rem 2rem 0rem 2rem;
+  min-width: 400px;
+  margin: 1rem 2rem 0rem 2rem;
 }
 
 .search-bar-container input {
-  width: 100%;
   padding: 0.8rem 2.5rem;
   font-size: 1rem;
   border-radius: 5px;
@@ -203,7 +211,7 @@
 .video-games-subtitle {
   font-size: 1.2rem;
   color: #E5E7EB;
-  margin: 2.5rem 2rem 1rem 2rem;
+  margin: 1.5rem 2rem 1rem 2rem;
   padding: 0rem;
 }
 
@@ -225,6 +233,25 @@
   background-color: #e04e2a;
 }
 
+.video-games-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .video-games-header {
+    align-items: center;
+    text-align: center;
+  }
+
+  .video-games-subtitle,
+  .videogames-reserve-button,
+  .search-bar-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 @media (max-width: 768px) {
   .games-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -341,13 +368,16 @@
 
 @media (max-width: 768px) {
   .search-bar-container {
-      max-width: 70%; /* Full width on mobile */
+      max-width: 90%; /* Full width on mobile */
       margin: 0.5rem 1rem; /* Reduced margin on mobile */
+      min-width: 100%;
+
   }
 
   .search-bar-container input {
       padding: 0.8rem 2rem; /* Slightly smaller padding */
       font-size: 0.9rem; /* Smaller font size for mobile */
+      min-width: 70%;
   }
 
   .search-bar-container .search-icon {

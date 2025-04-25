@@ -14,6 +14,7 @@ import EventsLandingPageSection from '../components/EventsLanding';
 import BoardGamesSection from '../components/BoardGames';
 import LoginAndSignup from '../components/Login&Signup';
 import FAQSection from '../components/FAQ';
+import OrientationWarning from '../components/OrientationWarning'; 
 
 function Home() {
    useEffect(() => {
@@ -22,6 +23,7 @@ function Home() {
         
   return (
     <div className="Home">
+      <OrientationWarning />
       <Navbar/>
       <Hero />
       <AboutUs/>

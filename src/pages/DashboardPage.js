@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import UserDashboard from '../components/UserDashboard';
+import './Home.css';
+import OrientationWarning from '../components/OrientationWarning'; 
 
 function DashboardPage() {
    useEffect(() => {
@@ -10,12 +12,11 @@ function DashboardPage() {
         
   return (
     <div className="Home">
-    
-   <Navbar/>
-   <UserDashboard/>
-    <Footer/> 
+      <OrientationWarning />
+      <Navbar/>
+      <UserDashboard/>
+      <Footer/> 
 
-    
     </div>
   );
 }

@@ -33,7 +33,7 @@ const LoginAndSignup =()=>{
             try {
              const username =formData.username;
               const data =await makeRequestCall('auth_script','check_username', { username });
-                console.log(data);
+                
               
             if(data.available){
                 setUsernameAvailable(data.available);
@@ -68,11 +68,7 @@ const LoginAndSignup =()=>{
           : { ...formData };
     
         try {
-        //   const response = await fetch(`https://yourapi.com/${apiEndpoint}`, {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(requestData),
-        //   });
+
         
           const data = await makeRequestCall('auth_script',apiEndpoint,requestData)
     
@@ -124,11 +120,7 @@ const LoginAndSignup =()=>{
                       <input type="text" placeholder="Enter your username" required 
                        value={formData.username}
                        name="username"
-                    //    onChange={(e) => {
-                    //     setUsername(e.target.value);
-                    //     handleChange();
-                    //    }}
-                       
+   
                         onChange={handleChange}
                        />
 

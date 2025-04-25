@@ -32,7 +32,7 @@ const Footer = () => {
                         <FaPhone className="icon" /> <span>+1 234 567 890</span>
                     </div>
                     <div className="contact-info">
-                        <FaEnvelope className="icon" /> <span>contact@yurankagames.com</span>
+                        <FaEnvelope className="icon" /> <span>support@yuranka.com</span>
                     </div>
                     <div className="contact-info">
                         <FaMapMarkerAlt className="icon" /> <span>Matīsa iela 25, Centra rajons, Rīga, LV-1001, Latvia</span>

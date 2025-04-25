@@ -3,11 +3,10 @@ import Hero from '../components/Hero';
 import Navbar from '../components/Navbar';
 import OurServices from '../components/OurServices';
 import Footer from '../components/Footer';
-
+import OrientationWarning from '../components/OrientationWarning'; 
 import './Home.css';
 
 import React, { useEffect } from 'react';
-import VideoGamesSection from '../components/VideoGames';
 import BoardGamesSection from '../components/BoardGames';
 
 function BoardGamesPage() {
@@ -17,6 +16,7 @@ function BoardGamesPage() {
 
     return (
     <div className="Home">
+      <OrientationWarning />
       <Navbar/>
       <BoardGamesSection/>
       <Footer/>

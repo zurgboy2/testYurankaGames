@@ -13,12 +13,14 @@ const VideoGamesSection = () => {
   const [visibleCount, setVisibleCount] = useState({});
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(''); 
+  const [prevVisibleCount, setPrevVisibleCount] = useState({});
 
  const navigate = useNavigate();
  
  const handleReserveGame = () => {
     navigate('/reservations'); // Navigate to the reservations page
 };
+
 
   useEffect(() => {
       async function fetchGames() {
@@ -69,6 +71,13 @@ const VideoGamesSection = () => {
   }
 
   function toggleGameDisplay(consoleType, totalGames) {
+    
+  setPrevVisibleCount(prev => ({
+    ...prev,
+    [consoleType]: visibleCount[consoleType] || 0
+  }))
+  
+  
     setVisibleCount(prev => {
       const isMobile = window.innerWidth <= 768; // Check if screen is mobile
       const increment = isMobile ? 4 : 10; // Show 4 more on mobile, 10 on desktop
@@ -101,6 +110,8 @@ const VideoGamesSection = () => {
         {!loading && (
         <>
        <h1 className="video-games-title">Video Games</h1>
+       <div className="video-games-header">
+
        <p className="video-games-subtitle">Browse our wide range of games and reserve a Couch Space to play. Each couch space can accomadate upto 6 people.</p>
        <button className="videogames-reserve-button" onClick={handleReserveGame}>Reserve Couch Space</button>
        <div className="search-bar-container">
@@ -113,6 +124,7 @@ const VideoGamesSection = () => {
             <div className="search-icon">
               <FaSearch />
             </div>
+          </div>
           </div>
        <h2 className="video-games-filter">Filters</h2>
 
@@ -160,8 +172,17 @@ const VideoGamesSection = () => {
                   <div className="filtered-games">
                       <h3>{activeFilter}</h3>
                       <div className="games-grid">
-                          {games.filter(game => game.console === activeFilter).map(game => (
-                              <div key={game.id} className="game-card">
+                          {games.filter(game => game.console === activeFilter).map((game, index) => (
+                             <div
+                             key={game.id}
+                             className={`game-card ${
+                               index < (prevVisibleCount[activeFilter] || 0)
+                                 ? ''
+                                 : index % 2 === 0
+                                   ? 'from-left'
+                                   : 'from-right'
+                             }`}
+                           >
                                   <img src={game.imageUrl === "No Image" ? noposter : game.imageUrl} alt="Game poster" /> 
                                   <h4>{game.name}</h4>
                                   <div className="game-info">

@@ -10,7 +10,6 @@
     color: #EAE5E5;
 }
 
-/* Cards container that allows horizontal scrolling */
 .cards-container {
     display: flex;
     gap: 2.5rem;

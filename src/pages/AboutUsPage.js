@@ -1,10 +1,10 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
 import './Home.css';
 import AboutYuranka from '../components/AboutYuranka';
 import React, { useEffect } from 'react';
 import FAQSection from '../components/FAQ';
+import OrientationWarning from '../components/OrientationWarning'; 
 
 function AboutUsPage() {
      useEffect(() => {
@@ -12,14 +12,13 @@ function AboutUsPage() {
           }, []);
 
   return (
-    <div className="Home">
-  
-    <Navbar/>
-     <AboutYuranka/>
-     <FAQSection/>
-     <Footer/>
+      <div className="Home">
+      <OrientationWarning />
+      <Navbar/>
+      <AboutYuranka/>
+      <FAQSection/>
+      <Footer/>
 
-  
     </div>
   );
 }

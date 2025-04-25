@@ -28,7 +28,7 @@ const UserDashboard = () => {
     try {
         const data = await makeRegistrationRequestCall("auth_script",'getUserInfo', { username, googleToken });
         setStoreCredit(data.Value != null ? parseFloat(data.Value).toFixed(2) : "0.00");
-        console.log(data);
+        
         //setSalesData(data.Sales);
         const dummySalesData = {
             "2024-03-01": 50.75,
@@ -83,7 +83,7 @@ const UserDashboard = () => {
         setUpdateStatus({ success: false, message: "Failed to update profile. Please check your password and try again." });
         }
 
-        console.log(response);
+        
     }
     catch(e){
 

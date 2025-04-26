@@ -338,7 +338,7 @@
     .nav-links {
         position: fixed;
         top: 0;
-        width: 220px;
+        width: 25%;
         /* Fixed width instead of 50% */
         left: -300px;
         height: 90%;
@@ -360,7 +360,7 @@
 
     /* When active, slide in from the left */
     .nav-links.active {
-        transform: translateX(300px);
+        transform: translateX(100%);
         /* Move it into view */
     }
 

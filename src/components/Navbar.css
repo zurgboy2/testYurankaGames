@@ -311,3 +311,139 @@
         pointer-events: none;
     }
 }
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .navbar {   
+        padding: 0.5rem 1.5rem;
+    }
+
+    .navbar {
+        max-width: 100%;
+    }
+
+    /* Show hamburger menu and hide auth buttons */
+    .menu-icon {
+        display: block;
+    }
+
+    .auth-buttons {
+        display: none;
+    }
+
+    .logo-container {
+        margin-right: 1.5rem;
+    }
+
+    /* Hide the inline nav links on mobile */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        width: 220px;
+        /* Fixed width instead of 50% */
+        left: -300px;
+        height: 90%;
+        background: #0E0C0C;
+        flex-direction: column;
+        align-items: left;
+        gap: 1.5rem;
+        padding: 0rem 1.5rem;
+        transition: transform 0.15s ease-in-out;
+        z-index: 999;
+        /* Sit above content */
+        margin-top: 1rem;
+        justify-content: flex-start;
+        overflow-y: auto; 
+        overscroll-behavior: contain; 
+        padding-bottom: 1rem;
+        padding-left: 3rem;
+    }
+
+    /* When active, slide in from the left */
+    .nav-links.active {
+        transform: translateX(300px);
+        /* Move it into view */
+    }
+
+    /* Optionally adjust links styling */
+    .nav-links li a {
+        font-size: 1.3rem;
+        color: #E5E7EB;
+        text-decoration: none;
+    }
+
+    .mobile-auth {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .mobile-auth .signin {
+        font-size: 1.3rem;
+        color: #EF4444;
+        text-decoration: none;
+        padding: 0rem;
+    }
+
+    .mobile-auth .signup {
+        font-size: 1.3rem;
+        color: #EF4444;
+        text-decoration: none;
+        padding: 0rem;
+        background-color: #0E0C0C;
+    }
+
+    .mobile-auth .signup {
+        background-color: #0E0C0C;
+    }
+
+    /* Mobile User Profile */
+    .mobile-user-profile {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        gap: 10px;
+        padding: 0.5rem;
+    }
+
+    .mobile-avatar {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+
+    .mobile-username {
+        font-size: 1rem;
+        font-weight: bold;
+        color: white;
+    }
+
+    .user-profile {
+        display: none;
+    }
+
+    .events-dropdown-menu {
+        position: static;
+        background: transparent;
+        padding-left: 1.5rem;
+        display: block;
+        box-shadow: none;
+    }
+
+    .events-dropdown-menu li {
+        padding: 0.5rem 0;
+    }
+
+    .events-dropdown-menu a {
+        font-size: 1.1rem;
+    }
+
+    .dropdown-arrow {
+        display: none;
+    }
+
+    .events-dropdown-trigger {
+        pointer-events: none;
+    }
+
+
+  }

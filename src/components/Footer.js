@@ -22,6 +22,8 @@ const Footer = () => {
                     <a href="https://store.yuranka.com">Store</a>
                     <Link to="/events">Events</Link>
                     <Link to="/reservations">Reservations</Link>
+                    <Link to="/boardgames">Board Games</Link>
+                    <Link to="/videogames">Video Games</Link>
                     <Link to="/about">About Us</Link>
                 </div>
 
@@ -29,7 +31,7 @@ const Footer = () => {
                 <div className="footer-section">
                     <h3 className="contact-heading">Contact</h3>
                     <div className="contact-info">
-                        <FaPhone className="icon" /> <span>+1 234 567 890</span>
+                        <FaPhone className="icon" /> <span>+371 27 460 885</span>
                     </div>
                     <div className="contact-info">
                         <FaEnvelope className="icon" /> <span>support@yuranka.com</span>

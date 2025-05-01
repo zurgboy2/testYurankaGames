@@ -1,6 +1,6 @@
 
 export const getProxyTokenCall= async function getProxyToken(scriptId,action) {
-    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/get_token?bypass_key=Naleefwhatare102035940123';
+    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/get_token';
 
     const requestBody = {
       script_id: scriptId,
@@ -12,7 +12,6 @@ export const getProxyTokenCall= async function getProxyToken(scriptId,action) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-CORS-Bypass-Key': 'Naleefwhatare102035940123'
       },
       body: JSON.stringify(requestBody)
     });
@@ -28,7 +27,7 @@ export const getProxyTokenCall= async function getProxyToken(scriptId,action) {
 
 
   export const makeRequestCall =async function makeRequest(scriptId,action, formData = {}) {
-    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/proxy?bypass_key=Naleefwhatare102035940123';
+    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/proxy';
     try {
       const token = await getProxyTokenCall(scriptId,action);
       const requestBody = {
@@ -57,7 +56,7 @@ export const getProxyTokenCall= async function getProxyToken(scriptId,action) {
   }
 
   export const makeRegistrationRequestCall =async function makeRequest(scriptId,action, formData = {}) {
-    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/proxy?bypass_key=Naleefwhatare102035940123';
+    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/proxy';
     try {
       const token = await getProxyTokenCall(scriptId,action);
       const requestBody = {
@@ -86,7 +85,7 @@ export const getProxyTokenCall= async function getProxyToken(scriptId,action) {
   }
 
   export const makeVideoGamesRequestCall =async function makeRequest(scriptId,action) {
-    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/proxy?bypass_key=Naleefwhatare102035940123';
+    const API_URL = 'https://isa-scavenger-761151e3e681.herokuapp.com/proxy';
     try {
       const token = await getProxyTokenCall("games_script",action);
       const requestBody = {

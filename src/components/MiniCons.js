@@ -153,7 +153,7 @@ export default function MiniCon() {
       name: "Winter Olympics",
       logo: "https://ik.imagekit.io/mcgszbooe/Wii%20Sports.svg",
       background: "https://ik.imagekit.io/mcgszbooe/wii%20sports.jpg",
-      status: "upcoming",
+      status: "done",
       content: {
         title: "Yuranka Wii Olympics @ Wintercon",
         date: "January 18th, 2025",

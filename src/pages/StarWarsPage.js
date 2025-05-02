@@ -1,4 +1,3 @@
-import React from 'react';
 import PersonalityTest from '../components/PersonalityTest';
 import './StarWarsPage.css';
 import React, { useEffect } from 'react';

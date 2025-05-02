@@ -10,6 +10,7 @@ import DashboardPage from './pages/DashboardPage';
 import VideoGamesPage from './pages/VideoGamesPage';
 import BoardGamesPage from './pages/BoardGamesPage';
 import MiniConsPage from './pages/MiniConsPage';
+import StarWarsPage from './pages/StarWarsPage';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage/>}/>
         <Route path="/videogames" element={<VideoGamesPage/>}/>
         <Route path="/boardgames" element={<BoardGamesPage/>}/>
-
+        <Route path="/starwars" element={<StarWarsPage/>}/>
       </Routes>
     </div>
   );

@@ -81,6 +81,7 @@ useEffect(() => {
         <ul className={`events-dropdown-menu ${eventsDropdownOpen ? 'active' : ''}`}>
           <li><Link to="/events">Main Events</Link></li>
           <li><Link to="/minicons">Minicons</Link></li>
+          <li><Link to="/starwars">Star Wars</Link></li>
         </ul>
       </li>
       <li><Link to="/reservations" >Reservations</Link></li>

@@ -112,7 +112,7 @@ const VideoGamesSection = () => {
        <h1 className="video-games-title">Video Games</h1>
        <div className="video-games-header">
 
-       <p className="video-games-subtitle">Browse our wide range of games and reserve a Couch Space to play. Each couch space can accomadate upto 6 people.</p>
+       <p className="video-games-subtitle">Browse our wide range of games and reserve a Couch Space to play. Each couch space can accommodate upto 6 people.</p>
        <button className="videogames-reserve-button" onClick={handleReserveGame}>Reserve Couch Space</button>
        <div className="search-bar-container">
             <input

@@ -70,7 +70,7 @@ useEffect(() => {
       {/* Navigation Links inside an oval */}
       <ul className={menuOpen ? "nav-links active" : "nav-links" } >
       <li><Link to="/" >Home</Link></li>
-      <li><a href="https://store.yuranka.com">Store</a></li>
+      <li><Link to="/store" >Store</Link></li>
       <li className="events-dropdown" 
             onMouseEnter={handleEventsHover}
             onMouseLeave={handleEventsLeave}>

@@ -11,6 +11,7 @@ import VideoGamesPage from './pages/VideoGamesPage';
 import BoardGamesPage from './pages/BoardGamesPage';
 import MiniConsPage from './pages/MiniConsPage';
 import StarWarsPage from './pages/StarWarsPage';
+import StorePage from './pages/StorePage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/minicons" element={<MiniConsPage/>}/>
         <Route path="/reservations" element={<ReservationsPage />} />
         <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/store" element={<StorePage />} />
         <Route path="/login&signup" element={<LoginAndSignupPage/>}/>
         <Route path="/dashboard" element={<DashboardPage/>}/>
         <Route path="/videogames" element={<VideoGamesPage/>}/>

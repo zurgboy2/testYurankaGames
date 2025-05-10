@@ -1,0 +1,132 @@
+{
+    "tcgs": [
+      {
+        "id": 1,
+        "name": "Yu-Gi-Oh!",
+        "image": "/images/yugioh.jpg",
+        "description": "The original Japanese trading card game that's been popular worldwide since 1999.",
+        "products": [
+          {
+            "id": "y1",
+            "name": "Structure Deck: Cyber Strike",
+            "price": 19.99,
+            "image": "/images/yugioh-cyber-strike.jpg"
+          },
+          {
+            "id": "y2",
+            "name": "Legendary Duelists: Synchro Storm",
+            "price": 29.99,
+            "image": "/images/yugioh-synchro-storm.jpg"
+          },
+          {
+            "id": "y3",
+            "name": "Maximum Gold: El Dorado",
+            "price": 34.99,
+            "image": "/images/yugioh-el-dorado.jpg"
+          },
+          {
+            "id": "y4",
+            "name": "Phantom Rage Booster Box",
+            "price": 89.99,
+            "image": "/images/yugioh-phantom-rage.jpg"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Magic: The Gathering",
+        "image": "/images/mtg.jpg",
+        "description": "The world's first trading card game with over 20 million players worldwide.",
+        "products": [
+          {
+            "id": "m1",
+            "name": "Innistrad: Midnight Hunt Bundle",
+            "price": 39.99,
+            "image": "/images/mtg-midnight-hunt.jpg"
+          },
+          {
+            "id": "m2",
+            "name": "Strixhaven: School of Mages Collector Booster",
+            "price": 24.99,
+            "image": "/images/mtg-strixhaven.jpg"
+          },
+          {
+            "id": "m3",
+            "name": "Adventures in the Forgotten Realms Draft Booster",
+            "price": 4.99,
+            "image": "/images/mtg-forgotten-realms.jpg"
+          },
+          {
+            "id": "m4",
+            "name": "Kaldheim Commander Deck",
+            "price": 39.99,
+            "image": "/images/mtg-kaldheim.jpg"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Pokémon TCG",
+        "image": "/images/pokemon.jpg",
+        "description": "Catch, collect and battle with your favorite Pokémon characters.",
+        "products": [
+          {
+            "id": "p1",
+            "name": "Sword & Shield Evolving Skies Booster Box",
+            "price": 144.99,
+            "image": "/images/pokemon-evolving-skies.jpg"
+          },
+          {
+            "id": "p2",
+            "name": "Celebrations Elite Trainer Box",
+            "price": 49.99,
+            "image": "/images/pokemon-celebrations.jpg"
+          },
+          {
+            "id": "p3",
+            "name": "Shining Fates Premium Collection",
+            "price": 39.99,
+            "image": "/images/pokemon-shining-fates.jpg"
+          },
+          {
+            "id": "p4",
+            "name": "Battle Styles Booster Pack",
+            "price": 4.49,
+            "image": "/images/pokemon-battle-styles.jpg"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Digimon Card Game",
+        "image": "/images/digimon.jpg",
+        "description": "The next evolution in digital monster card games.",
+        "products": [
+          {
+            "id": "d1",
+            "name": "Great Legend Booster Box",
+            "price": 79.99,
+            "image": "/images/digimon-great-legend.jpg"
+          },
+          {
+            "id": "d2",
+            "name": "Release Special Booster Ver.1.5",
+            "price": 4.99,
+            "image": "/images/digimon-release-special.jpg"
+          },
+          {
+            "id": "d3",
+            "name": "Starter Deck Gaia Red",
+            "price": 12.99,
+            "image": "/images/digimon-gaia-red.jpg"
+          },
+          {
+            "id": "d4",
+            "name": "Battle of Omni Booster Pack",
+            "price": 4.99,
+            "image": "/images/digimon-battle-omni.jpg"
+          }
+        ]
+      }
+    ]
+  }

@@ -1,5 +1,6 @@
 {
   "name": "yurankagames",
+  "homepage": "https://zurgboy2.github.io/testYurankaGames",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,7 +22,6 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

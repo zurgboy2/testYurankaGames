@@ -1,6 +1,7 @@
 // src/components/Store.js
 import React, { useState, useRef, useEffect } from 'react';
 import './Store.css';
+import { useNavigate } from 'react-router-dom';
 
 // TCG categories
 const tcgCategories = [
@@ -63,6 +64,7 @@ const StoreCom = () => {
   const [loading, setLoading] = useState(true);
   const [collectionLoading, setCollectionLoading] = useState(false);
   const scrollerRef = useRef(null);
+  const navigate = useNavigate();
 
   // Fetch recent products and collection thumbnails when selectedTcg changes
   useEffect(() => {
@@ -288,23 +290,36 @@ const StoreCom = () => {
 
   // Render product cards
   const renderProductCards = (products) => {
-    return products.map((product) => (
-      <div key={product.id} className="product-card">
-        <img 
-          src={product.media.nodes[0]?.previewImage?.url || '/images/placeholder.jpg'} 
-          alt={product.title} 
-          className="product-img" 
-        />
-        <h4>{product.title}</h4>
-        <p className="inventory">In stock: {product.totalInventory || 'Out of stock'}</p>
-        <p className="price">
-          {product.priceRange?.minVariantPrice 
-            ? formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)
-            : 'Price unavailable'}
-        </p>
-        <button className="buy-button">Add to Cart</button>
-      </div>
-    ));
+    return products.map((product) => {
+      return (
+        <div key={product.id} className="product-card">
+          <img 
+            src={product.media.nodes[0]?.previewImage?.url || '/images/placeholder.jpg'} 
+            alt={product.title} 
+            className="product-img" 
+          />
+          <h4>{product.title}</h4>
+          <p className="inventory">In stock: {product.totalInventory || 'Out of stock'}</p>
+          <p className="price">
+            {product.priceRange?.minVariantPrice 
+              ? formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)
+              : 'Price unavailable'}
+          </p>
+          <button 
+            className="buy-button"
+              onClick={() => {
+                navigate(`/product?id=${encodeURIComponent(product.id)}`, { 
+                  state: { 
+                    productId: product.id
+                  } 
+                });
+              }}
+          >
+            View Details
+          </button>
+        </div>
+      );
+    });
   };
 
   return (

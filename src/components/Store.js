@@ -14,7 +14,10 @@ const tcgCategories = [
     collections: [
       { name: "Structure Decks", tag: "structure-deck" },
       { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Tins & Special Editions", tag: "tins-special" }
+      { name: "Tins & Special Editions", tag: "mega-tin" },
+      { name: "Booster Box", tag: "Booster-box" },
+      { name: "Accessories", tag: "accessories" },
+      { name: "Pre-Sale", tag: "pre-sale" }
     ]
   },
   {
@@ -25,8 +28,10 @@ const tcgCategories = [
     description: "The world's first trading card game with over 20 million players worldwide.",
     collections: [
       { name: "Commander Decks", tag: "commander" },
-      { name: "Draft Boosters", tag: "draft-booster" },
-      { name: "Set Boosters", tag: "set-booster" }
+      { name: "Booster Packs", tag: "booster-pack" },
+      { name: "Deck Boxes", tag: "deck_boxes" },
+      { name: "Challenger Deck", tag: "Challenger deck" }
+
     ]
   },
   {
@@ -38,7 +43,15 @@ const tcgCategories = [
     collections: [
       { name: "Booster Boxes", tag: "booster-box" },
       { name: "Elite Trainer Boxes", tag: "elite-trainer" },
-      { name: "Theme Decks", tag: "theme-deck" }
+      { name: "Theme Decks", tag: "theme-deck" },
+      { name: "Booster Packs", tag: "booster-pack" },
+      { name: "Collector's Chest", tag: "Collecter-Chest" },
+      { name: "Battle Deck", tag: "battle-deck" },
+      { name: "Premium Collection", tag: "Premum-deck-box" },
+      { name: "Pokemon Tin", tag: "mega-tin" },
+      { name: "Two Play Starter Deck", tag: "two-player-starter-decks" },
+      { name: "Accessories", tag: "accessories" }
+
     ]
   },
   {
@@ -48,9 +61,57 @@ const tcgCategories = [
     tag: "digimon",
     description: "The next evolution in digital monster card games.",
     collections: [
-      { name: "Starter Decks", tag: "starter-deck" },
+      { name: "Starter Decks", tag: "starter_deck" },
       { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Special Releases", tag: "special-release" }
+      { name: "Booster Box", tag: "booster-box" },
+      { name: "Double Pack", tag: "Doube-Booster-pack" },
+      { name: "Premium Collection Deck", tag: "Premum-deck-box" },
+      { name: "Sleeves", tag: "sleeves" }
+    ]
+  },
+  {
+    id: 5,
+    name: "One Piece",
+    image: "/images/onepiece.jpg",
+    tag: "one-piece",
+    description: "Finding the One-Piece.",
+    collections: [
+      { name: "Starter Decks", tag: "starter_deck" },
+      { name: "Booster Packs", tag: "booster-pack" },
+      { name: "Booster Box", tag: "Booster-box" },
+      { name: "Deck Boxes", tag: "deck_boxes" },
+      { name: "Collectibles", tag: "figurines" },
+      { name: "Sleeves", tag: "sleeves" },
+      { name: "Pre-Sale", tag: "pre-sale" }
+    ]
+  },
+  {
+    id: 6,
+    name: "Star Wars Card Game",
+    image: "/images/starwars.jpg",
+    tag: "Star-wars",
+    description: "Welcome to the Dark Side",
+    collections: [
+      { name: "Starter Decks", tag: "two-player-starter-decks" },
+      { name: "Booster Packs", tag: "booster-pack" },
+      { name: "Booster Box", tag: "Booster-box" },
+      { name: "Deck Box", tag: "deck_boxes" },
+      { name: "Playmats", tag: "Playmats" },
+
+    ]
+  },
+  {
+    id: 7,
+    name: "Lorcana Card Game",
+    image: "/images/lorcana.jpg",
+    tag: "lorcana",
+    description: "Lorcana TCG",
+    collections: [
+      { name: "Starter Decks", tag: "starter_deck" },
+      { name: "Booster Packs", tag: "booster-pack" },
+      { name: "Booster Box", tag: "Booster-box" },
+
+
     ]
   }
 ];

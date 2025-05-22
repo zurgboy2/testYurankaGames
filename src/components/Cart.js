@@ -115,7 +115,7 @@ const Cart = () => {
   if (error) {
     return (
       <div className="cart-page">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="cart-container">
           <div className="error-message">
             <h3>Error</h3>
@@ -123,7 +123,7 @@ const Cart = () => {
             <Link to="/store" className="continue-shopping">Continue Shopping</Link>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
@@ -134,7 +134,7 @@ const Cart = () => {
   
   return (
     <div className="cart-page">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="cart-container">
         <h1 className="cart-title">Your Shopping Cart</h1>
         
@@ -204,7 +204,7 @@ const Cart = () => {
           </>
         )}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

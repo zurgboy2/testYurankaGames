@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './CartIcon.css';
-
+import { FaShoppingCart } from 'react-icons/fa';
 const CartIcon = () => {
   const { state } = useCart();
   
@@ -11,7 +11,8 @@ const CartIcon = () => {
     <div className="cart-icon-container">
       <Link to="/cart" className="cart-icon-link">
         <div className="cart-icon">
-          <i className="fas fa-shopping-cart"></i>
+          {/* <i className="fas fa-shopping-cart"></i> */}
+          <FaShoppingCart/>
           {state.totalQuantity > 0 && (
             <span className="cart-badge">{state.totalQuantity}</span>
           )}

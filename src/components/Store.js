@@ -110,8 +110,6 @@ const tcgCategories = [
       { name: "Starter Decks", tag: "starter_deck" },
       { name: "Booster Packs", tag: "booster-pack" },
       { name: "Booster Box", tag: "Booster-box" },
-
-
     ]
   }
 ];

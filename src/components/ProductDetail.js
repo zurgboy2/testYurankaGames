@@ -204,7 +204,6 @@ const ProductDetail = () => {
     <div className="product-detail-container">
       <div className="product-detail-header">
         <Link to="/store" className="back-link">← Back to Store</Link>
-        <h2>{product.title}</h2>
       </div>
       
       <div className="product-detail-content">
@@ -219,6 +218,7 @@ const ProductDetail = () => {
         </div>
         
         <div className="product-info-container">
+          <h1 className="product-title">{product.title}</h1>
           <div className="product-price">
             {formatPrice(variant.price.amount, variant.price.currencyCode)}
           </div>
@@ -260,7 +260,6 @@ const ProductDetail = () => {
             <h3>Description</h3>
             <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
           </div>
-          
           <div className="product-details">
             <h3>Product Details</h3>
             <ul>
@@ -268,9 +267,12 @@ const ProductDetail = () => {
               <li>Shipping Required: {variant.requiresShipping ? 'Yes' : 'No'}</li>
               {product.requiresSellingPlan ? <li>Subscription Product</li> : null}
             </ul>
-          </div>
+          </div> 
+          
+          
         </div>
       </div>
+     
     </div>
   );
 };

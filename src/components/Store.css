@@ -2,14 +2,14 @@
 .store-section {
     background-color: #0E0C0C;
     color: #EAEAEA;
-    padding: 0.5rem 2rem;
+    padding: 4rem 2rem 2rem 2rem;
     text-align: left;
 }
 
 .store-heading {
     font-size: 2rem;
     color: #EAEAEA;
-    margin-left: 2rem;
+    margin-left: 1rem;
 }
 
 .highlight {
@@ -28,21 +28,25 @@
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
+    /* Firefox */
     padding: 1rem 0;
-    -ms-overflow-style: none; /* IE and Edge */
+    -ms-overflow-style: none;
+    /* IE and Edge */
 }
 
 .tcg-scroller::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .tcg-tab {
     min-width: 150px;
-    height: 100px;
+    height: 150px;
+    min-height: 100%;
     margin-right: 1.5rem;
     border-radius: 10px;
-    background-color: #1E1E1E;
+    background-color: #ad3131;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -53,16 +57,23 @@
 }
 
 .tcg-tab.active {
-    border: 2px solid #DE2323;
-    transform: translateY(-5px);
+    border: 0.2rem solid #efeded;
+    transform: translateY(-10px);
 }
 
 .tcg-thumbnail {
-    width: 60px;
+    width: 150px;
     height: 60px;
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 0.5rem;
+}
+
+.tcg-name {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #f0e9e9;
+    font-weight: 500;
 }
 
 .scroll-button {
@@ -194,39 +205,42 @@
     margin-bottom: 1.5rem;
 }
 
-.back-button {
-    background: none;
+.collection-back-button {
+    background-color: #ef4444;
+    color: #EAEAEA;
     border: none;
-    color: #DE2323;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    margin-right: 1rem;
     border-radius: 5px;
+    padding: 0.8rem 1rem;
+    font-weight: 300;
+    cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 0;
+    margin-left: 0.5rem;
 }
 
-.back-button:hover {
+.collection-back-button:hover {
     background-color: rgba(222, 35, 35, 0.1);
 }
 
 .collection-title {
     font-size: 1.8rem;
-    margin: 0;
 }
+
 
 /* Product Gallery */
 .product-gallery {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 1.5rem;
 }
 
 .product-card {
-    background-color: #1E1E1E;
+    background-color: #eae8e8;
     border-radius: 15px;
     padding: 1rem;
     transition: transform 0.3s ease;
+    border: #ad3131 0.2rem solid;
+
 }
 
 .product-card:hover {
@@ -239,35 +253,43 @@
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 1rem;
+    /* border: #ad3131 0.2rem solid; */
 }
 
 .product-card h4 {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
     min-height: 2.6rem;
+    text-align: center;
+    color: #151111;
+    margin-top: 0rem;
+
 }
 
 .price {
     font-size: 1.2rem;
-    font-weight: bold;
-    color: #DE2323;
+    font-weight: 800;
+    color: #D63030;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .buy-button {
-    background-color: #DE2323;
-    color: white;
+    background-color: #ef4444;
+    color: #EAEAEA;
     border: none;
     border-radius: 5px;
     padding: 0.5rem 1rem;
     width: 100%;
-    font-weight: bold;
+    font-weight: 300;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 0;
 }
 
 .buy-button:hover {
-    background-color: #BC1C1C;
+    background-color: #c02a2a;
+    color: #EAEAEA;
 }
 
 /* Loading state */
@@ -290,8 +312,13 @@
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* No products state */
@@ -304,7 +331,7 @@
 /* Inventory status */
 .inventory {
     font-size: 0.9rem;
-    color: #aaa;
+    color: #000;
     margin-bottom: 0.5rem;
 }
 
@@ -322,7 +349,7 @@
     .product-gallery {
         grid-template-columns: repeat(3, 1fr);
     }
-    
+
     .collection-thumbnails {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -332,7 +359,7 @@
     .product-gallery {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .collection-thumbnails {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -340,16 +367,18 @@
 
 @media (max-width: 768px) {
     .store-section {
-        padding: 0.5rem 1rem;
+        padding: 3rem 1rem 1rem 1rem;
     }
 
     .store-heading {
         font-size: 1.8rem;
-        margin-left: 1rem;
+        text-align: center;
+        margin-left: 1.5rem;
     }
 
     .highlight {
         font-size: 2.5rem;
+        margin-left: 0rem;
     }
 
     .tcg-intro h3 {
@@ -369,18 +398,93 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
-    
+
     .section-heading {
         font-size: 1.6rem;
     }
-    
+
     .collection-name {
         font-size: 1rem;
     }
-    
+
     .collection-title {
         font-size: 1.6rem;
     }
+
+    .tcg-name {
+        font-size: 1rem;
+    }
+
+    .tcg-tab {
+        min-height: 120px;
+    }
+
+    .tcg-thumbnail {
+        width: 120px;
+    }
+
+    .tcg-scroller-container {
+        position: relative;
+        margin: 2rem 0rem 2rem 0rem;
+    }
+
+    .product-card {
+        background-color: #eae8e8;
+        border-radius: 15px;
+        padding: 0.5rem;
+        transition: transform 0.3s ease;
+        border: #ad3131 0.2rem solid;
+
+    }
+
+    .product-img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+        /* border: #ad3131 0.2rem solid; */
+    }
+
+    .product-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        min-height: 2.6rem;
+        text-align: center;
+        color: #151111;
+        margin-top: 0rem;
+
+    }
+
+    .price {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #D63030;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        margin-top: 0rem;
+    }
+
+    .buy-button {
+        background-color: #ef4444;
+        color: #EAEAEA;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        font-weight: 300;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0;
+    }
+
+    .inventory {
+        font-size: 0.9rem;
+        color: #000;
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -391,21 +495,21 @@
     .collection-thumbnails {
         grid-template-columns: 1fr;
     }
-    
+
     .tcg-tab {
         min-width: 100px;
     }
-    
+
     .thumbnail-image-container {
         height: 200px;
     }
-    
+
     .collection-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
-    .back-button {
+
+    .collection-back-button {
         margin-bottom: 1rem;
     }
 }

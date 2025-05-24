@@ -2,13 +2,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Store.css';
 import { useNavigate } from 'react-router-dom';
+import yugiohLogo from "../assets/yugiohlogo.png";
+import mtgLogo from "../assets/mtglogo.png";
+import pokemonLogo from "../assets/pokemonlogo.png";
+import onepieceLogo from "../assets/onepiecelogo.png";
+import starwarsLogo from "../assets/starwarslogo.png";
+import lorcanaLogo from "../assets/lorcanalogo.png";
+import digimonLogo from "../assets/digimonlogo.png";
 
 // TCG categories
 const tcgCategories = [
   {
     id: 1,
     name: "Yu-Gi-Oh!",
-    image: "/images/yugioh.jpg",
+    image: yugiohLogo,
     tag: "yugioh",
     description: "The original Japanese trading card game that's been popular worldwide since 1999.",
     collections: [
@@ -23,7 +30,7 @@ const tcgCategories = [
   {
     id: 2,
     name: "Magic: The Gathering",
-    image: "/images/mtg.jpg",
+    image: mtgLogo,
     tag: "magic",
     description: "The world's first trading card game with over 20 million players worldwide.",
     collections: [
@@ -37,7 +44,7 @@ const tcgCategories = [
   {
     id: 3,
     name: "Pokémon TCG",
-    image: "/images/pokemon.jpg",
+    image: pokemonLogo,
     tag: "pokemon",
     description: "Catch, collect and battle with your favorite Pokémon characters.",
     collections: [
@@ -57,7 +64,7 @@ const tcgCategories = [
   {
     id: 4,
     name: "Digimon Card Game",
-    image: "/images/digimon.jpg",
+    image: digimonLogo,
     tag: "digimon",
     description: "The next evolution in digital monster card games.",
     collections: [
@@ -72,7 +79,7 @@ const tcgCategories = [
   {
     id: 5,
     name: "One Piece",
-    image: "/images/onepiece.jpg",
+    image: onepieceLogo,
     tag: "one-piece",
     description: "Finding the One-Piece.",
     collections: [
@@ -88,7 +95,7 @@ const tcgCategories = [
   {
     id: 6,
     name: "Star Wars Card Game",
-    image: "/images/starwars.jpg",
+    image: starwarsLogo,
     tag: "Star-wars",
     description: "Welcome to the Dark Side",
     collections: [
@@ -103,7 +110,7 @@ const tcgCategories = [
   {
     id: 7,
     name: "Lorcana Card Game",
-    image: "/images/lorcana.jpg",
+    image: lorcanaLogo,
     tag: "lorcana",
     description: "Lorcana TCG",
     collections: [
@@ -386,7 +393,7 @@ const StoreCom = () => {
       <h2 className="store-heading">Our <span className="highlight">TCG</span> Collection</h2>
       
       <div className="tcg-scroller-container">
-        <button className="scroll-button left" onClick={scrollLeft}>&#10094;</button>
+        {/* <button className="scroll-button left" onClick={scrollLeft}>&#10094;</button> */}
         <div className="tcg-scroller" ref={scrollerRef}>
           {tcgCategories.map((tcg) => (
             <div 
@@ -395,11 +402,11 @@ const StoreCom = () => {
               onClick={() => handleTcgSelect(tcg)}
             >
               <img src={tcg.image} alt={tcg.name} className="tcg-thumbnail" />
-              <span>{tcg.name}</span>
+              <span className='tcg-name'>{tcg.name}</span>
             </div>
           ))}
         </div>
-        <button className="scroll-button right" onClick={scrollRight}>&#10095;</button>
+        {/* <button className="scroll-button right" onClick={scrollRight}>&#10095;</button> */}
       </div>
 
       <div className="tcg-content">
@@ -442,10 +449,10 @@ const StoreCom = () => {
         {/* Collection Products */}
         {selectedCollection && (
           <div className="collection-products-section">
-            <div className="collection-header">
-              <button className="back-button" onClick={handleBackToCollections}>
+            <button className="collection-back-button" onClick={handleBackToCollections}>
                 &#8592; Back to Collections
               </button>
+            <div className="collection-header">          
               <h3 className="collection-title">{selectedCollection.name}</h3>
             </div>
             

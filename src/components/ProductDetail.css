@@ -202,8 +202,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .error-message {
@@ -241,20 +246,20 @@
   .product-detail-content {
     flex-direction: column;
   }
-  
+
   .product-image-container,
   .product-info-container {
     width: 100%;
   }
-  
+
   .product-detail-header h2 {
     font-size: 1.8rem;
   }
-  
+
   .product-price {
     font-size: 24px;
   }
-  
+
   .product-description h3,
   .product-details h3 {
     font-size: 1.2rem;
@@ -265,13 +270,13 @@
   .product-detail-container {
     padding: 15px;
   }
-  
+
   .product-actions,
   .product-description,
   .product-details {
     padding: 15px;
   }
-  
+
   .product-detail-header h2 {
     font-size: 1.6rem;
   }

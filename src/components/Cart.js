@@ -6,13 +6,15 @@ import { getCart, updateCartItemQuantity, removeCartItem, getCheckoutUrl } from 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './Cart.css';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const { state, dispatch } = useCart();
   const [loading, setLoading] = useState(true);
   const [cartData, setCartData] = useState(null);
   const [error, setError] = useState(null);
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchCart = async () => {
       setLoading(true);
@@ -100,14 +102,14 @@ const Cart = () => {
   if (loading) {
     return (
       <div className="cart-page">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="cart-container">
           <div className="loading-container">
             <div className="loading-spinner"></div>
             <p>Loading cart...</p>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
@@ -120,8 +122,13 @@ const Cart = () => {
           <div className="error-message">
             <h3>Error</h3>
             <p>{error}</p>
-            <Link to="/store" className="continue-shopping">Continue Shopping</Link>
-          </div>
+            <button
+             className="continue-shopping"
+             onClick={() => navigate('/store')}
+            >
+            Continue Shopping
+            </button>          
+                </div>
         </div>
         {/* <Footer /> */}
       </div>
@@ -142,8 +149,12 @@ const Cart = () => {
           <div className="empty-cart">
             <h2>Your cart is empty</h2>
             <p>Looks like you haven't added any items to your cart yet.</p>
-            <Link to="/store" className="continue-shopping">Continue Shopping</Link>
-          </div>
+            <button
+             className="continue-shopping"
+             onClick={() => navigate('/store')}
+            >
+            Continue Shopping
+            </button>             </div>
         ) : (
           <>
             <div className="cart-items">
@@ -195,8 +206,12 @@ const Cart = () => {
                 <span>{formatPrice(cartTotal, cartCurrency)}</span>
               </div>
               <div className="cart-actions">
-                <Link to="/store" className="continue-shopping">Continue Shopping</Link>
-                <button className="checkout-button" onClick={handleCheckout}>
+              <button
+              className="continue-shopping"
+              onClick={() => navigate('/store')}
+              >
+            Continue Shopping
+            </button>                   <button className="checkout-button" onClick={handleCheckout}>
                   Proceed to Checkout
                 </button>
               </div>

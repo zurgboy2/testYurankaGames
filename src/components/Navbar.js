@@ -114,7 +114,7 @@ useEffect(() => {
 )}
       </ul>
       
-      <div className="cart-container">
+      <div className="cart-navbar-container">
         <CartIcon />
       </div>
 

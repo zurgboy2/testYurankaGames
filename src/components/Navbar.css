@@ -447,3 +447,14 @@
 
 
   }
+
+  .cart-navbar-container {
+   margin: 1rem 1rem;
+  color: #EAEAEA;
+}
+
+@media (max-width: 768px) {
+  .cart-navbar-container {
+    margin: 0rem 2.5rem 0rem 0rem;
+  }
+}

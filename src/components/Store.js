@@ -285,6 +285,7 @@ const StoreCom = () => {
               totalInventory
               id
               descriptionHtml
+              tags
               priceRange {
                 minVariantPrice {
                   amount
@@ -360,6 +361,10 @@ const StoreCom = () => {
   // Render product cards
   const renderProductCards = (products) => {
     return products.map((product) => {
+
+       const isPreSale = product.tags?.includes('pre-sale');
+       const inStock = product.totalInventory > 0 || isPreSale;
+
       return (
         <div key={product.id} className="product-card">
           <img 
@@ -368,8 +373,7 @@ const StoreCom = () => {
             className="product-img" 
           />
           <h4>{product.title}</h4>
-          <p className="inventory">In stock: {product.totalInventory || 'Out of stock'}</p>
-          <p className="price">
+          <p className="inventory"> {inStock ? `In stock: ${product.totalInventory}` : 'Out of stock'}</p>          <p className="price">
             {product.priceRange?.minVariantPrice 
               ? formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)
               : 'Price unavailable'}

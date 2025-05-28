@@ -37,7 +37,8 @@ const tcgCategories = [
       { name: "Commander Decks", tag: "commander" },
       { name: "Booster Packs", tag: "booster-pack" },
       { name: "Deck Boxes", tag: "deck_boxes" },
-      { name: "Challenger Deck", tag: "Challenger deck" }
+      { name: "Challenger Deck", tag: "Challenger deck" },
+      { name: "Pre-Sale", tag: "pre-sale" }
 
     ]
   },
@@ -57,8 +58,8 @@ const tcgCategories = [
       { name: "Premium Collection", tag: "Premum-deck-box" },
       { name: "Pokemon Tin", tag: "mega-tin" },
       { name: "Two Play Starter Deck", tag: "two-player-starter-decks" },
-      { name: "Accessories", tag: "accessories" }
-
+      { name: "Accessories", tag: "accessories" },
+      { name: "Pre-Sale", tag: "pre-sale" }
     ]
   },
   {
@@ -73,7 +74,8 @@ const tcgCategories = [
       { name: "Booster Box", tag: "booster-box" },
       { name: "Double Pack", tag: "Doube-Booster-pack" },
       { name: "Premium Collection Deck", tag: "Premum-deck-box" },
-      { name: "Sleeves", tag: "sleeves" }
+      { name: "Sleeves", tag: "sleeves" },
+      { name: "Pre-Sale", tag: "pre-sale" }
     ]
   },
   {
@@ -89,7 +91,7 @@ const tcgCategories = [
       { name: "Deck Boxes", tag: "deck_boxes" },
       { name: "Collectibles", tag: "figurines" },
       { name: "Sleeves", tag: "sleeves" },
-      { name: "Pre-Sale", tag: "pre-sale" }
+      { name: "Pre-Sale", tag: "pre-sale" },
     ]
   },
   {
@@ -104,7 +106,7 @@ const tcgCategories = [
       { name: "Booster Box", tag: "Booster-box" },
       { name: "Deck Box", tag: "deck_boxes" },
       { name: "Playmats", tag: "Playmats" },
-
+      { name: "Pre-Sale", tag: "pre-sale" }
     ]
   },
   {
@@ -117,6 +119,7 @@ const tcgCategories = [
       { name: "Starter Decks", tag: "starter_deck" },
       { name: "Booster Packs", tag: "booster-pack" },
       { name: "Booster Box", tag: "Booster-box" },
+      { name: "Pre-Sale", tag: "pre-sale" }
     ]
   }
 ];

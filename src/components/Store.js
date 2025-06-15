@@ -397,7 +397,7 @@ const StoreCom = () => {
 
   return (
     <div className="store-section">
-      <h2 className="store-heading">Our <span className="highlight">TCG</span> Collection</h2>
+      <h2 className="store-heading">Our Products</h2>
       
       <div className="tcg-scroller-container">
         {/* <button className="scroll-button left" onClick={scrollLeft}>&#10094;</button> */}

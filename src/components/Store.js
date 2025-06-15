@@ -148,6 +148,14 @@ const StoreCom = () => {
   const scrollerRef = useRef(null);
   const navigate = useNavigate();
 
+  const [selectedTcg, setSelectedTcg] = useState(() => {
+  const savedTag = localStorage.getItem('selectedTcgTag');
+  return (
+    tcgCategories.find((tcg) => tcg.tag === savedTag) ||
+    tcgCategories[0]
+     );
+  });
+  
   // Fetch recent products and collection thumbnails when selectedTcg changes
   useEffect(() => {
     fetchRecentProductsByTag(selectedTcg.tag);
@@ -337,6 +345,7 @@ const StoreCom = () => {
 
   const handleTcgSelect = (tcg) => {
     setSelectedTcg(tcg);
+    localStorage.setItem('selectedTcgTag', tcg.tag); 
   };
 
   const handleCollectionSelect = (collection) => {

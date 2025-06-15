@@ -121,7 +121,20 @@ const tcgCategories = [
       { name: "Booster Box", tag: "Booster-box" },
       { name: "Pre-Sale", tag: "pre-sale" }
     ]
-  }
+  },{
+    id: 8,
+    name: "Accessories",
+    image: accessoriesLogo,
+    tag: "accessories",
+    description: "Accessories TCG",
+    collections: [
+      { name: "Deck Boxes", tag: "deck_boxes" },
+      { name: "Sleeves", tag: "sleeves" },
+      { name: "Binders", tag: "Binders" },
+      { name: "Playmats", tag: "Playmats" },
+      { name: "Pocket Pages", tag: "Pocket_pages" }
+    ]
+  },
 ];
 
 const StoreCom = () => {

@@ -181,13 +181,14 @@ const tcgCategories = [
 ];
 
 const StoreCom = () => {
-  const [selectedTcg, setSelectedTcg] = useState(tcgCategories[0]);
   const [recentProducts, setRecentProducts] = useState([]);
   const [collectionProducts, setCollectionProducts] = useState([]);
   const [selectedCollection, setSelectedCollection] = useState(null);
   const [collectionThumbnails, setCollectionThumbnails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [collectionLoading, setCollectionLoading] = useState(false);
+  const [selectedAnime, setSelectedAnime] = useState(null);
+
   const scrollerRef = useRef(null);
   const navigate = useNavigate();
 
@@ -198,22 +199,44 @@ const StoreCom = () => {
     tcgCategories[0]
      );
   });
-  
-  // Fetch recent products and collection thumbnails when selectedTcg changes
-  useEffect(() => {
-    fetchRecentProductsByTag(selectedTcg.tag);
-    fetchCollectionThumbnails(selectedTcg);
-    setSelectedCollection(null); // Reset selected collection when TCG changes
-    setCollectionProducts([]); // Clear collection products
-  }, [selectedTcg]);
 
-  // Fetch products for a specific collection when selected
+  useEffect(() => {
+    setSelectedCollection(null); 
+    setCollectionProducts([]); 
+    if (selectedTcg.tag === "anime" && !selectedAnime) {
+      setSelectedAnime(null); 
+      setCollectionThumbnails([]); 
+      fetchRecentProductsByTag("anime");
+    } else {
+      setCollectionThumbnails([]); 
+      fetchRecentProductsByTag(selectedTcg.tag);
+      fetchCollectionThumbnails(selectedTcg);
+    }
+  }, [selectedTcg,selectedAnime]);
+
+  useEffect(() => {
+    if (selectedTcg.tag === "anime" && selectedAnime) {
+      fetchCollectionThumbnails(selectedTcg, selectedAnime);
+      fetchRecentProductsByTagAndTitle(selectedTcg.tag,selectedAnime.name);
+      setSelectedCollection(null);
+      setCollectionProducts([]);
+    }
+  }, [selectedAnime, selectedTcg]);
+
   useEffect(() => {
     if (selectedCollection) {
-      fetchCollectionProducts(selectedTcg.tag, selectedCollection.tag);
+      if (selectedTcg.tag === "anime" && selectedAnime) {
+        fetchCollectionProductsByTagAndName(
+          selectedTcg.tag,
+          selectedCollection.tag,
+          selectedAnime.name
+        );
+      } else {
+        fetchCollectionProducts(selectedTcg.tag, selectedCollection.tag);
+      }
     }
-  }, [selectedCollection]);
-
+  }, [selectedCollection, selectedAnime, selectedTcg]);
+  
   // Fetch recent products for the selected TCG
   const fetchRecentProductsByTag = async (tag) => {
     setLoading(true);
@@ -270,13 +293,15 @@ const StoreCom = () => {
     }
   };
 
-  // Fetch collection thumbnails (first product from each collection)
-  const fetchCollectionThumbnails = async (tcg) => {
-    const thumbnailsPromises = tcg.collections.map(async (collection) => {
+  const fetchRecentProductsByTagAndTitle = async (tag, titleContains) => {
+      setLoading(true);
+      const safeTitle = titleContains.replace(/"/g, '\\"');
+      const queryString = `tag:${tag} AND title:*${safeTitle}* AND inventory_total:>0 AND tag_not:test`;
+
       try {
         const query = `
-          query CollectionThumbnail {
-            products(query: "tag:${tcg.tag} AND tag:${collection.tag} AND inventory_total:>0 AND tag_not:test", first: 1) {
+          query RecentProductsByTagAndTitle {
+            products(query: "${queryString}", first: 8, sortKey: CREATED_AT, reverse: true) {
               nodes {
                 media(first: 1) {
                   nodes {
@@ -285,6 +310,82 @@ const StoreCom = () => {
                     }
                   }
                 }
+                title
+                totalInventory
+                id
+                descriptionHtml
+                priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+          }
+        `;
+
+        const response = await fetch('https://064679-3.myshopify.com/api/2023-07/graphql.json', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': '5b98e116f2c08ee62389cf9331650002',
+          },
+          body: JSON.stringify({ query }),
+        });
+
+        const data = await response.json();
+
+        if (data.data && data.data.products && data.data.products.nodes) {
+          setRecentProducts(data.data.products.nodes);
+        } else {
+          setRecentProducts([]);
+          console.error('No recent products found or unexpected response format');
+        }
+      } catch (error) {
+        console.error('Error fetching recent products:', error);
+        setRecentProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+  const fetchCollectionThumbnails = async (tcg, selectedAnime = null) => {
+    setLoading(true);
+    let collections = [];
+
+    if (tcg.tag === "anime" && selectedAnime) {
+      collections = selectedAnime.collections;
+    } 
+    else if (tcg.tag === "anime" && !selectedAnime) {
+      setCollectionThumbnails(
+        tcg.animes.map(anime => ({
+          ...anime,
+          hasProducts: true,
+          thumbnailUrl: anime.image, 
+        }))
+      );
+      return;
+    } else if (tcg.collections) {
+      collections = tcg.collections;
+    }
+
+    const thumbnailsPromises = collections.map(async (collection) => {
+      try {
+
+        let queryString;
+        if (tcg.tag === "anime" && selectedAnime) {
+          queryString = `tag:anime AND tag:${collection.tag} AND title:*${selectedAnime.name}* AND inventory_total:>0 AND tag_not:test`;
+        } else {
+          queryString = `tag:${tcg.tag} AND tag:${collection.tag} AND inventory_total:>0 AND tag_not:test`;
+        }
+
+        const query = `
+          query CollectionThumbnail {
+            products(query: "${queryString}", first: 5) {
+              nodes {
+                title
+                media(first: 1) { nodes { previewImage { url } } }
                 id
               }
             }
@@ -301,12 +402,13 @@ const StoreCom = () => {
         });
 
         const data = await response.json();
-        
-        if (data.data?.products?.nodes?.length > 0) {
+        let nodes = data.data?.products?.nodes || [];
+
+        if (nodes.length > 0) {
           return {
             ...collection,
             hasProducts: true,
-            thumbnailUrl: data.data.products.nodes[0].media.nodes[0]?.previewImage?.url
+            thumbnailUrl: nodes[0].media.nodes[0]?.previewImage?.url || null
           };
         } else {
           return {
@@ -322,6 +424,8 @@ const StoreCom = () => {
           hasProducts: false,
           thumbnailUrl: null
         };
+      }finally{
+          setLoading(false);
       }
     });
 
@@ -386,7 +490,67 @@ const StoreCom = () => {
     }
   };
 
+  const fetchCollectionProductsByTagAndName = async (tcgTag, collectionTag, tcgName) => {
+    setCollectionLoading(true);
+    
+    try {
+      const query = `
+        query CollectionProducts {
+          products(query: "tag:${tcgTag} AND tag:${collectionTag} AND inventory_total:>0 AND tag_not:test", first: 50) {
+            nodes {
+              media(first: 1) {
+                nodes {
+                  previewImage {
+                    url
+                  }
+                }
+              }
+              title
+              totalInventory
+              id
+              descriptionHtml
+              tags
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const response = await fetch('https://064679-3.myshopify.com/api/2023-07/graphql.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': '5b98e116f2c08ee62389cf9331650002',
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      const data = await response.json();
+
+      let products = data.data?.products?.nodes || [];
+      if (tcgName) {
+        const nameLower = tcgName.toLowerCase();
+        products = products.filter(product =>
+          product.title.toLowerCase().includes(nameLower)
+        );
+      }
+
+      setCollectionProducts(products);
+    } catch (error) {
+      setCollectionProducts([]);
+      console.error("Error fetching collection products:", error);
+    } finally {
+      setCollectionLoading(false);
+    }
+  };
+
   const handleTcgSelect = (tcg) => {
+    setSelectedAnime(null);
     setSelectedTcg(tcg);
     localStorage.setItem('selectedTcgTag', tcg.tag); 
   };

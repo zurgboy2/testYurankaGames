@@ -1,15 +1,15 @@
-import yugiohLogo from "../../assets/yugiohlogo.png";
-import mtgLogo from "../../assets/mtglogo.png";
-import pokemonLogo from "../../assets/pokemonlogo.png";
-import onepieceLogo from "../../assets/onepiecelogo.png";
-import starwarsLogo from "../../assets/starwarslogo.png";
-import lorcanaLogo from "../../assets/lorcanalogo.png";
-import digimonLogo from "../../assets/digimonlogo.png";
-import accessoriesLogo from "../../assets/tcg-accessories.png";
-import animeCCGs from "../../assets/anime-ccgs.png";
-import goddessStoryLogo from "../../assets/goddess-story.png";
-import honkaiLogo from "../../assets/honkai.png";
-import genshinImpactLogo from "../../assets/genshin-impact.png";
+import yugiohLogo from "../../assets/store/yugiohlogo.png";
+import mtgLogo from "../../assets/store/mtglogo.png";
+import pokemonLogo from "../../assets/store/pokemonlogo.png";
+import onepieceLogo from "../../assets/store/onepiecelogo.png";
+import starwarsLogo from "../../assets/store/starwarslogo.png";
+import lorcanaLogo from "../../assets/store/lorcanalogo.png";
+import digimonLogo from "../../assets/store/digimonlogo.png";
+import accessoriesLogo from "../../assets/store/tcg-accessories.png";
+import animeCCGs from "../../assets/store/anime-ccgs.png";
+import goddessStoryLogo from "../../assets/store/goddess-story.png";
+import honkaiLogo from "../../assets/store/honkai.png";
+import genshinImpactLogo from "../../assets/store/genshin-impact.png";
 
 // TCG categories
 export const tcgCategories = [

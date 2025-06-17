@@ -9,6 +9,7 @@ import onepieceLogo from "../assets/onepiecelogo.png";
 import starwarsLogo from "../assets/starwarslogo.png";
 import lorcanaLogo from "../assets/lorcanalogo.png";
 import digimonLogo from "../assets/digimonlogo.png";
+import accessoriesLogo from "../assets/tcg-accessories.png";
 
 // TCG categories
 const tcgCategories = [

@@ -10,6 +10,10 @@ import starwarsLogo from "../assets/starwarslogo.png";
 import lorcanaLogo from "../assets/lorcanalogo.png";
 import digimonLogo from "../assets/digimonlogo.png";
 import accessoriesLogo from "../assets/tcg-accessories.png";
+import animeCCGs from "../assets/anime-ccgs.png";
+import goddessStoryLogo from "../assets/goddess-story.png";
+import honkaiLogo from "../assets/honkai.png";
+import genshinImpactLogo from "../assets/genshin-impact.png";
 
 // TCG categories
 const tcgCategories = [
@@ -122,8 +126,46 @@ const tcgCategories = [
       { name: "Booster Box", tag: "Booster-box" },
       { name: "Pre-Sale", tag: "pre-sale" }
     ]
-  },{
+  },
+  {
     id: 8,
+    name: "Anime CCGs",
+    image: animeCCGs,
+    tag: "anime",
+    description: "Play the best anime card games!",
+    animes: [
+      {
+        id: 1,
+        name: "Goddess Story",
+        image: goddessStoryLogo,
+        collections: [
+          { name: "Booster Box", tag: "Booster box" },
+          { name: "Booster Packs", tag: "booster pack" }
+        ]
+      },
+      {
+        id: 2,
+        name: "Honkai",
+        image: honkaiLogo,
+        collections: [
+          { name: "Booster Box", tag: "Booster box" },
+          { name: "Booster Packs", tag: "booster pack" }
+        ]
+      },
+      {
+        id: 3,
+        name: "Genshin Impact",
+        image: genshinImpactLogo,
+        collections: [
+          { name: "Banners", tag: "banners" },
+          { name: "Booster Box", tag: "booster-box" },
+          { name: "Booster Packs", tag: "booster pack" }
+        ]
+      }
+    ]
+  },
+  {
+    id: 9,
     name: "Accessories",
     image: accessoriesLogo,
     tag: "accessories",

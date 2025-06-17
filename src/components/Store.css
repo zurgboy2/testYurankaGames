@@ -7,9 +7,9 @@
 }
 
 .store-heading {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #EAEAEA;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
 
 .highlight {
@@ -21,7 +21,7 @@
 /* TCG Scroller */
 .tcg-scroller-container {
     position: relative;
-    margin: 2rem 0;
+    margin: 2rem 0rem 2rem 0.5rem;
 }
 
 .tcg-scroller {
@@ -114,6 +114,7 @@
 .tcg-intro h3 {
     font-size: 2.2rem;
     margin-bottom: 1rem;
+    margin-left: 0.5rem;
 }
 
 .tcg-intro p {

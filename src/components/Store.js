@@ -651,11 +651,63 @@ const StoreCom = () => {
           <p>{selectedTcg.description}</p>
         </div>
 
+        {/* Anime section: show animes as "collections" */}
+        {selectedTcg.tag === "anime" && !selectedAnime && (
+          <>
+            <h3 className="section-heading">Anime Series</h3>
+            <div className="collections-container">
+              <div className="collection-thumbnails">
+              {selectedTcg.animes.map(anime => (
+                <div
+                  key={anime.name}
+                  className="collection-thumbnail"
+                  onClick={() => setSelectedAnime(anime)}
+                >
+                  <div className="thumbnail-image-container">
+                    <img src={anime.image} alt={anime.name} className="thumbnail-img" />
+                  </div>
+                  <h4 className="collection-name">{anime.name}</h4>
+                </div>
+              ))}
+            </div>
+            </div>
+          </>
+        )}
+
+        {selectedTcg.tag === "anime" && selectedAnime && !selectedCollection && (
+          <>
+            <button className="collection-back-button" onClick={() => setSelectedAnime(null)}>
+              &#8592; Back to Anime
+            </button>
+            <h3 className="section-heading">{selectedAnime.name} Collections</h3>
+            <div className="collections-container">
+             <div className="collection-thumbnails">
+              {collectionThumbnails.map(collection => (
+                <div
+                  key={collection.tag}
+                  className="collection-thumbnail"
+                  onClick={() => setSelectedCollection(collection)}
+                >
+                  <div className="thumbnail-image-container">
+                    <img
+                        src={collection.thumbnailUrl}
+                        alt={collection.name}
+                        className="thumbnail-img"
+                      /> 
+                  </div>
+                  <h4 className="collection-name">{collection.name}</h4>
+                </div>
+              ))}
+            </div>
+          </div>
+          </>
+        )}
+
         {/* Collection Thumbnails */}
-        {!selectedCollection && (
+        {selectedTcg.tag !== "anime" && !selectedCollection && (
           <>
             <h3 className="section-heading">Collections</h3>
-            <div className="collections-container">
+            <div className="collections-container"> 
               {collectionThumbnails.length > 0 ? (
                 <div className="collection-thumbnails">
                   {collectionThumbnails.map((collection) => (

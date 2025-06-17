@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import './Home.css';
 import React, { useEffect } from 'react';
 import OrientationWarning from '../components/OrientationWarning'; 
-import ProductDetail from '../components/ProductDetail';
+import ProductDetail from '../components/store/ProductDetail';
 
 function ProductPage() {
      useEffect(() => {

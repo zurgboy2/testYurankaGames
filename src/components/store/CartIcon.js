@@ -1,7 +1,7 @@
 // src/components/CartIcon.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../context/CartContext';
 import './CartIcon.css';
 import { FaShoppingCart } from 'react-icons/fa';
 const CartIcon = () => {

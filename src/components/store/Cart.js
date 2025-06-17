@@ -1,10 +1,10 @@
 // src/pages/CartPage.js
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import { getCart, updateCartItemQuantity, removeCartItem, getCheckoutUrl } from '../services/cartService';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import { useCart } from '../../context/CartContext';
+import { getCart, updateCartItemQuantity, removeCartItem, getCheckoutUrl } from '../../services/cartService';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 import './Cart.css';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './ProductDetail.css';
-import { useCart } from '../context/CartContext';
-import { addToCart } from '../services/cartService';
+import { useCart } from '../../context/CartContext';
+import { addToCart } from '../../services/cartService';
 
 
 const ProductDetail = () => {

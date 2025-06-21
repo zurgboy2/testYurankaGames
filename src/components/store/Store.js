@@ -542,7 +542,7 @@ const StoreCom = () => {
                     >
                       <div className="thumbnail-image-container">
                         <img 
-                          src={collection.thumbnailUrl || '/images/placeholder.jpg'} 
+                          src={collection.image || '/images/placeholder.jpg'} 
                           alt={collection.name} 
                           className="thumbnail-img" 
                         />

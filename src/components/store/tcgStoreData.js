@@ -10,8 +10,62 @@ import animeCCGs from "../../assets/store/anime-ccgs.png";
 import goddessStoryLogo from "../../assets/store/goddess-story.png";
 import honkaiLogo from "../../assets/store/honkai.png";
 import genshinImpactLogo from "../../assets/store/genshin-impact.png";
+import yugiohstructure from "../../assets/store/yugioh-structure.png";
+import yugiohBoosterpack from "../../assets/store/yugioh-boosterpack.png";
+import yugiohTin from "../../assets/store/yugioh-tin.png";
+import yugiohBoosterbox from "../../assets/store/yugioh-boosterbox.png";
+import yugiohAccessories from "../../assets/store/yugioh-accessories.png";
+import yugiohPresale from "../../assets/store/yugioh-presale.png";
+import mtgCommander from "../../assets/store/mtg-commander.png";
+import mtgBoosterPack from "../../assets/store/mtg-booster-pack.png";
+import mtgDeckBoxes from "../../assets/store/mtg-deck.webp";
+import mtgChallengerDeck from "../../assets/store/mtg-challenger.png";
+import mtgPresale from "../../assets/store/mtg-presale.jpg";
+import pokemonBoosterBox from "../../assets/store/pkm-boosterbox.webp";
+import pokemonEliteTrainer from "../../assets/store/pkm-elite.webp";
+import pokemonCollectorChest from "../../assets/store/pkm-collectors.webp";
+import pokemonBattleDeck from "../../assets/store/pkm-battle.webp";
+import pokemonPremiumCollection from "../../assets/store/pkm-premium.webp";
+import pokemonTwoPlayerStarter from "../../assets/store/pkm-two.webp";
+import pokemonBoosterPack from "../../assets/store/pkm-boosterpack.webp";
+import pokemonTin from "../../assets/store/pkm-tin.png";
+import pokemonSleeves from "../../assets/store/pkm-sleeves.webp";
+import pokemonDeckBox from "../../assets/store/pkm-deck.webp";
+import pokemonPlaymats from "../../assets/store/pkm-playmat.webp";
+import pokemonOthers from "../../assets/store/pkm-others.webp";
+import digimonStarterDeck from "../../assets/store/digimon-starter.webp";
+import digimonBoosterPack from "../../assets/store/digimon-boosterpack.webp";
+import digimonBoosterBox from "../../assets/store/digimon-boosterbox.webp";
+import digimonDoublePack from "../../assets/store/digimon-double.webp";
+import digimonPremiumCollection from "../../assets/store/digimon-premium.webp";
+import digimonSleeves from "../../assets/store/digimon-sleeves.webp";
+import onePieceStarterDeck from "../../assets/store/onepiece-starter.webp";
+import onePieceBoosterPack from "../../assets/store/onepiece-boosterpack.webp";
+import onePieceBoosterBox from "../../assets/store/onepiece-boosterbox.webp";
+import onePieceDeckBoxes from "../../assets/store/onepiece-deckbox.webp";
+import onePieceCollectibles from "../../assets/store/onepiece-collectibles.webp";
+import onePieceSleeves from "../../assets/store/onepiece-sleeves.webp";
+import onePiecePreSale from "../../assets/store/onepiece-presale.webp";
+import starWarsStarterDeck from "../../assets/store/starwars-starter.webp";
+import starWarsBoosterPack from "../../assets/store/starwars-boosterpack.webp";
+import starWarsBoosterBox from "../../assets/store/starwars-boosterbox.webp";
+import starWarsDeckBoxes from "../../assets/store/starwars-deck.webp";
+import starWarsPlaymats from "../../assets/store/starwars-playmat.webp";
+import lorcanaStarterDeck from "../../assets/store/lorcana-starter.webp";
+import lorcanaBoosterPack from "../../assets/store/lorcana-boosterpack.webp";
+import lorcanaBoosterBox from "../../assets/store/lorcana-boosterbox.webp";
+import goddessBoosterBox from "../../assets/store/goddess-boosterbox.webp";
+import goddessBoosterPack from "../../assets/store/goddess-boosterpack.webp";
+import honkaiBoosterBox from "../../assets/store/honkai-boosterbox.webp";
+import honkaiBoosterPack from "../../assets/store/honkai-boosterpack.webp";
+import genshinBoosterBox from "../../assets/store/genshin-boosterbox.webp";
+import genshinBoosterPack from "../../assets/store/genshin-boosterpacks.webp";
+import tcgDeck from "../../assets/store/tcg-deck.webp";
+import tcgSleeves from "../../assets/store/tcg-sleeve.webp";
+import tcgBinders from "../../assets/store/tcg-binder.webp";
+import tcgPlaymats from "../../assets/store/tcg-playmat.webp";
+import tcgPocketPages from "../../assets/store/tcg-pocketpages.webp";
 
-// TCG categories
 export const tcgCategories = [
   {
     id: 1,
@@ -20,12 +74,12 @@ export const tcgCategories = [
     tag: "yugioh",
     description: "The original Japanese trading card game that's been popular worldwide since 1999.",
     collections: [
-      { name: "Structure Decks", tag: "structure-deck" },
-      { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Tins & Special Editions", tag: "mega-tin" },
-      { name: "Booster Box", tag: "Booster-box" },
-      { name: "Accessories", tag: "accessories" },
-      { name: "Pre-Sale", tag: "pre-sale" }
+      { name: "Structure Decks", tag: "structure-deck", image: yugiohstructure },
+      { name: "Booster Packs", tag: "booster-pack", image: yugiohBoosterpack },
+      { name: "Tins & Special Editions", tag: "mega-tin", image: yugiohTin },
+      { name: "Booster Box", tag: "Booster-box", image: yugiohBoosterbox },
+      { name: "Accessories", tag: "accessories", image: yugiohAccessories },
+      { name: "Pre-Sale", tag: "pre-sale", image: yugiohPresale }
     ]
   },
   {
@@ -35,12 +89,11 @@ export const tcgCategories = [
     tag: "magic",
     description: "The world's first trading card game with over 20 million players worldwide.",
     collections: [
-      { name: "Commander Decks", tag: "commander" },
-      { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Deck Boxes", tag: "deck_boxes" },
-      { name: "Challenger Deck", tag: "Challenger deck" },
-      { name: "Pre-Sale", tag: "pre-sale" }
-
+      { name: "Commander Decks", tag: "commander", image: mtgCommander },
+      { name: "Booster Packs", tag: "booster-pack", image: mtgBoosterPack },
+      { name: "Deck Boxes", tag: "deck_boxes", image: mtgDeckBoxes },
+      { name: "Challenger Deck", tag: "Challenger deck", image: mtgChallengerDeck },
+      { name: "Pre-Sale", tag: "pre-sale", image: mtgPresale }
     ]
   },
   {
@@ -50,17 +103,18 @@ export const tcgCategories = [
     tag: "pokemon",
     description: "Catch, collect and battle with your favorite Pokémon characters.",
     collections: [
-      { name: "Booster Boxes", tag: "booster-box" },
-      { name: "Elite Trainer Boxes", tag: "elite-trainer" },
-      { name: "Theme Decks", tag: "theme-deck" },
-      { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Collector's Chest", tag: "Collecter-Chest" },
-      { name: "Battle Deck", tag: "battle-deck" },
-      { name: "Premium Collection", tag: "Premum-deck-box" },
-      { name: "Pokemon Tin", tag: "mega-tin" },
-      { name: "Two Play Starter Deck", tag: "two-player-starter-decks" },
-      { name: "Accessories", tag: "accessories" },
-      { name: "Pre-Sale", tag: "pre-sale" }
+      { name: "Booster Boxes", tag: "booster-box", image: pokemonBoosterBox },
+      { name: "Elite Trainer Boxes", tag: "elite-trainer", image: pokemonEliteTrainer },
+      { name: "Booster Packs", tag: "booster-pack", image: pokemonBoosterPack },
+      { name: "Collector's Chest", tag: "Collecter-Chest", image: pokemonCollectorChest },
+      { name: "Battle Deck", tag: "battle-deck", image: pokemonBattleDeck },
+      { name: "Premium Collection", tag: "Premum-deck-box" , image: pokemonPremiumCollection },
+      { name: "Pokemon Tin", tag: "mega-tin", image: pokemonTin },
+      { name: "Two Play Starter Deck", tag: "two-player-starter-decks", image: pokemonTwoPlayerStarter },
+      { name: "Sleeves", tag: "sleeves" , image: pokemonSleeves },
+      { name: "Deck Box", tag: "deck_boxes" , image: pokemonDeckBox },
+      { name: "Playmats", tag: "Playmats" , image: pokemonPlaymats },
+      { name: "Others", tag: "others" , image: pokemonOthers },
     ]
   },
   {
@@ -70,13 +124,12 @@ export const tcgCategories = [
     tag: "digimon",
     description: "The next evolution in digital monster card games.",
     collections: [
-      { name: "Starter Decks", tag: "starter_deck" },
-      { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Booster Box", tag: "booster-box" },
-      { name: "Double Pack", tag: "Doube-Booster-pack" },
-      { name: "Premium Collection Deck", tag: "Premum-deck-box" },
-      { name: "Sleeves", tag: "sleeves" },
-      { name: "Pre-Sale", tag: "pre-sale" }
+      { name: "Starter Decks", tag: "starter_deck", image: digimonStarterDeck },
+      { name: "Booster Packs", tag: "booster-pack", image: digimonBoosterPack },
+      { name: "Booster Box", tag: "booster-box", image: digimonBoosterBox },
+      { name: "Double Pack", tag: "Doube-Booster-pack", image: digimonDoublePack },
+      { name: "Premium Collection Deck", tag: "Premum-deck-box", image: digimonPremiumCollection },
+      { name: "Sleeves", tag: "sleeves", image: digimonSleeves },
     ]
   },
   {
@@ -86,13 +139,13 @@ export const tcgCategories = [
     tag: "one-piece",
     description: "Finding the One-Piece.",
     collections: [
-      { name: "Starter Decks", tag: "starter_deck" },
-      { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Booster Box", tag: "Booster-box" },
-      { name: "Deck Boxes", tag: "deck_boxes" },
-      { name: "Collectibles", tag: "figurines" },
-      { name: "Sleeves", tag: "sleeves" },
-      { name: "Pre-Sale", tag: "pre-sale" },
+      { name: "Starter Decks", tag: "starter_deck", image: onePieceStarterDeck },
+      { name: "Booster Packs", tag: "booster-pack", image: onePieceBoosterPack },
+      { name: "Booster Box", tag: "Booster-box", image: onePieceBoosterBox },
+      { name: "Deck Boxes", tag: "deck_boxes", image: onePieceDeckBoxes },
+      { name: "Collectibles", tag: "figurines", image: onePieceCollectibles },
+      { name: "Sleeves", tag: "sleeves", image: onePieceSleeves },
+      { name: "Pre-Sale", tag: "pre-sale", image: onePiecePreSale },
     ]
   },
   {
@@ -102,12 +155,11 @@ export const tcgCategories = [
     tag: "Star-wars",
     description: "Welcome to the Dark Side",
     collections: [
-      { name: "Starter Decks", tag: "two-player-starter-decks" },
-      { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Booster Box", tag: "Booster-box" },
-      { name: "Deck Box", tag: "deck_boxes" },
-      { name: "Playmats", tag: "Playmats" },
-      { name: "Pre-Sale", tag: "pre-sale" }
+      { name: "Starter Decks", tag: "two-player-starter-decks", image: starWarsStarterDeck },
+      { name: "Booster Packs", tag: "booster-pack", image: starWarsBoosterPack },
+      { name: "Booster Box", tag: "Booster-box", image: starWarsBoosterBox },
+      { name: "Deck Box", tag: "deck_boxes", image: starWarsDeckBoxes },
+      { name: "Playmats", tag: "Playmats", image: starWarsPlaymats },
     ]
   },
   {
@@ -117,10 +169,9 @@ export const tcgCategories = [
     tag: "lorcana",
     description: "Lorcana TCG",
     collections: [
-      { name: "Starter Decks", tag: "starter_deck" },
-      { name: "Booster Packs", tag: "booster-pack" },
-      { name: "Booster Box", tag: "Booster-box" },
-      { name: "Pre-Sale", tag: "pre-sale" }
+      { name: "Starter Decks", tag: "starter_deck", image: lorcanaStarterDeck },
+      { name: "Booster Packs", tag: "booster-pack", image: lorcanaBoosterPack },
+      { name: "Booster Box", tag: "Booster-box", image: lorcanaBoosterBox },
     ]
   },
   {
@@ -135,8 +186,8 @@ export const tcgCategories = [
         name: "Goddess Story",
         image: goddessStoryLogo,
         collections: [
-          { name: "Booster Box", tag: "Booster box" },
-          { name: "Booster Packs", tag: "booster pack" }
+          { name: "Booster Box", tag: "Booster box", image: goddessBoosterBox },
+          { name: "Booster Packs", tag: "booster pack", image: goddessBoosterPack }
         ]
       },
       {
@@ -144,8 +195,8 @@ export const tcgCategories = [
         name: "Honkai",
         image: honkaiLogo,
         collections: [
-          { name: "Booster Box", tag: "Booster box" },
-          { name: "Booster Packs", tag: "booster pack" }
+          { name: "Booster Box", tag: "Booster box", image: honkaiBoosterBox },
+          { name: "Booster Packs", tag: "booster pack", image: honkaiBoosterPack }
         ]
       },
       {
@@ -153,9 +204,9 @@ export const tcgCategories = [
         name: "Genshin Impact",
         image: genshinImpactLogo,
         collections: [
-          { name: "Banners", tag: "banners" },
-          { name: "Booster Box", tag: "booster-box" },
-          { name: "Booster Packs", tag: "booster pack" }
+          { name: "Banners", tag: "banners", image: genshinBoosterBox },
+          { name: "Booster Box", tag: "booster-box", image: genshinBoosterBox },
+          { name: "Booster Packs", tag: "booster pack", image: genshinBoosterPack }
         ]
       }
     ]
@@ -167,11 +218,11 @@ export const tcgCategories = [
     tag: "accessories",
     description: "Accessories TCG",
     collections: [
-      { name: "Deck Boxes", tag: "deck_boxes" },
-      { name: "Sleeves", tag: "sleeves" },
-      { name: "Binders", tag: "Binders" },
-      { name: "Playmats", tag: "Playmats" },
-      { name: "Pocket Pages", tag: "Pocket_pages" }
+      { name: "Deck Boxes", tag: "deck_boxes", image: tcgDeck },
+      { name: "Sleeves", tag: "sleeves", image: tcgSleeves },
+      { name: "Binders", tag: "Binders", image: tcgBinders },
+      { name: "Playmats", tag: "Playmats", image: tcgPlaymats },
+      { name: "Pocket Pages", tag: "Pocket_pages", image: tcgPocketPages }
     ]
   },
 ];

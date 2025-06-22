@@ -472,6 +472,62 @@ const StoreCom = () => {
   }
   };
 
+  const renderBreadcrumbs = () => {
+    const crumbs = [
+      { name: "Store", onClick: () => {
+        setSelectedTcg(tcgCategories[0]);
+        setSelectedAnime && setSelectedAnime(null);
+        setSelectedCollection(null);
+      }},
+    ];
+
+    if (selectedTcg) {
+      crumbs.push({
+        name: selectedTcg.name,
+        onClick: () => {
+          setSelectedAnime && setSelectedAnime(null);
+          setSelectedCollection(null);
+        }
+      });
+    }
+
+    if (selectedTcg && selectedTcg.tag === "anime" && selectedAnime) {
+      crumbs.push({
+        name: selectedAnime.name,
+        onClick: () => setSelectedCollection(null)
+      });
+    }
+
+    if (selectedCollection) {
+      console.log("selected collection breadcrumb",selectedCollection.name);
+      crumbs.push({
+        name: selectedCollection.name,
+        onClick: null 
+      });
+    }
+
+    return (
+      <nav className="breadcrumbs">
+        {crumbs.map((crumb, idx) => (
+          <span key={crumb.name}>
+            {crumb.onClick ? (
+              <button 
+                type="button" 
+                className="breadcrumb-link" 
+                onClick={crumb.onClick}
+              >
+                {crumb.name}
+              </button>
+            ) : (
+              <span className="breadcrumb-current">{crumb.name}</span>
+            )}
+            {idx < crumbs.length - 1 && <span className="breadcrumb-separator"> &raquo; </span>}
+          </span>
+        ))}
+      </nav>
+    );
+  };
+
   return (
     <div className="store-section">
       <h2 className="store-heading">Our Products</h2>
@@ -493,6 +549,7 @@ const StoreCom = () => {
       </div>
 
       <div className="tcg-content">
+        {renderBreadcrumbs()}
         <div className="tcg-intro">
           <h3>{selectedTcg.name}</h3>
           <p>{selectedTcg.description}</p>

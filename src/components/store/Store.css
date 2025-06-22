@@ -204,7 +204,7 @@
 .collection-header {
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0rem;
 }
 
 .collection-back-button {
@@ -311,6 +311,40 @@
     height: 40px;
     animation: spin 1s linear infinite;
     margin-bottom: 1rem;
+}
+
+.collection-controls {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.collection-controls span{
+    font-size: 1.2rem;
+    color: #EAEAEA;
+}
+.sort-controls{
+  background: #EAEAEA;
+  color: #0E0C0C;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 0.25rem 0.5rem;
+ 
+}
+.sort-controls select {
+  background: #EAEAEA;
+  color: #0E0C0C;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  border: none;
+}
+
+.sort-controls select option {
+  background: #EAEAEA;
+  color: #0E0C0C;
 }
 
 @keyframes spin {
@@ -485,6 +519,27 @@
         color: #000;
         margin-bottom: 0.3rem;
         font-weight: 500;
+    }
+
+    .collection-controls {
+        flex-direction: column;
+        align-items: self-start;
+        gap: 0.75rem;
+    }
+
+    .collection-controls span {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .sort-controls {
+        align-self: flex-start;
+        width: 70%;
+        max-width: 250px;
+    }
+    
+    .sort-controls select {
+        width: 100%;
     }
 
 }

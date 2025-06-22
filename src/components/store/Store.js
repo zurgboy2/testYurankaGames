@@ -12,6 +12,7 @@ const StoreCom = () => {
   const [loading, setLoading] = useState(true);
   const [collectionLoading, setCollectionLoading] = useState(false);
   const [selectedAnime, setSelectedAnime] = useState(null);
+  const [sortOption, setSortOption] = useState("latest");
 
   const scrollerRef = useRef(null);
   const navigate = useNavigate();
@@ -274,6 +275,7 @@ const StoreCom = () => {
                 }
               }
               title
+              createdAt
               totalInventory
               id
               descriptionHtml
@@ -330,6 +332,7 @@ const StoreCom = () => {
                 }
               }
               title
+              createdAt
               totalInventory
               id
               descriptionHtml
@@ -380,6 +383,7 @@ const StoreCom = () => {
   };
 
   const handleCollectionSelect = (collection) => {
+    setSortOption("latest");
     setSelectedCollection(collection);
   };
 
@@ -448,12 +452,31 @@ const StoreCom = () => {
     });
   };
 
+  const sortProducts = (products, option) => {
+  switch (option) {
+    case "price-high":
+      return [...products].sort(
+        (a, b) =>
+          parseFloat(b.priceRange.minVariantPrice.amount) -
+          parseFloat(a.priceRange.minVariantPrice.amount)
+      );
+    case "price-low":
+      return [...products].sort(
+        (a, b) =>
+          parseFloat(a.priceRange.minVariantPrice.amount) -
+          parseFloat(b.priceRange.minVariantPrice.amount)
+      );
+    case "latest":
+    default:
+      return products;
+  }
+  };
+
   return (
     <div className="store-section">
       <h2 className="store-heading">Our Products</h2>
       
       <div className="tcg-scroller-container">
-        {/* <button className="scroll-button left" onClick={scrollLeft}>&#10094;</button> */}
         <div className="tcg-scroller" ref={scrollerRef}>
           {tcgCategories.map((tcg) => (
             <div 
@@ -574,9 +597,25 @@ const StoreCom = () => {
                 <p>Loading collection products...</p>
               </div>
             ) : collectionProducts.length > 0 ? (
-              <div className="product-gallery">
-                {renderProductCards(collectionProducts)}
-              </div>
+              <>
+                <div className="collection-controls">
+                  <span>Showing all {collectionProducts.length} results</span>
+                  <div className="sort-controls">
+                    <select
+                      id="sort-select"
+                      value={sortOption}
+                      onChange={e => setSortOption(e.target.value)}
+                    >
+                      <option value="latest">Sort by Latest</option>
+                      <option value="price-high">Sort by Price: High to Low</option>
+                      <option value="price-low">Sort by Price: Low to High</option>
+                    </select>
+                    </div>
+                </div>
+                <div className="product-gallery">
+                  {renderProductCards(sortProducts(collectionProducts, sortOption))}
+                </div>
+              </>
             ) : (
               <div className="no-products">
                 <p>No products found in this collection.</p>

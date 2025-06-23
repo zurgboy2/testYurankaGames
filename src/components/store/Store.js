@@ -430,11 +430,13 @@ const StoreCom = () => {
             className="product-img" 
           />
           <h4>{product.title}</h4>
+          <div className="product-info">
           <p className="inventory"> {inStock ? `In stock: ${product.totalInventory}` : 'Out of stock'}</p>          <p className="price">
             {product.priceRange?.minVariantPrice 
               ? formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)
               : 'Price unavailable'}
           </p>
+          </div>
           <button 
             className="buy-button"
               onClick={() => {

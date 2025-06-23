@@ -7,9 +7,11 @@
 }
 
 .store-heading {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: #EAEAEA;
     margin-left: 0.5rem;
+    margin-bottom: 0rem;
+    margin-top: 1rem;
 }
 
 .highlight {
@@ -21,7 +23,7 @@
 /* TCG Scroller */
 .tcg-scroller-container {
     position: relative;
-    margin: 2rem 0rem 2rem 0.5rem;
+    margin: 1rem 0rem 0rem 0.5rem;
 }
 
 .tcg-scroller {
@@ -30,7 +32,7 @@
     scroll-behavior: smooth;
     scrollbar-width: none;
     /* Firefox */
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     -ms-overflow-style: none;
     /* IE and Edge */
 }
@@ -53,7 +55,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
+    padding: 0rem;
 }
 
 .tcg-tab.active {
@@ -70,10 +72,10 @@
 }
 
 .tcg-name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-align: center;
     color: #f0e9e9;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .scroll-button {
@@ -103,17 +105,16 @@
 
 /* TCG Content */
 .tcg-content {
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 .tcg-intro {
-    margin-bottom: 2rem;
-    max-width: 800px;
+    margin-bottom: 0rem;
 }
 
 .tcg-intro h3 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 0rem;
     margin-left: 0.5rem;
     margin-top: 1rem;
 }
@@ -121,11 +122,13 @@
 .tcg-intro p {
     font-size: 1.2rem;
     line-height: 1.6;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0.5rem;
 }
 
-/* Section Headings */
 .section-heading {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     margin: 2rem 0 1rem;
     color: #EAEAEA;
     position: relative;
@@ -142,20 +145,19 @@
     background-color: #DE2323;
 }
 
-/* Collections Container */
 .collections-container {
     margin: 1.5rem 0 3rem;
 }
 
 .collection-thumbnails {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
 }
 
 .collection-thumbnail {
     background-color: #1E1E1E;
-    border-radius: 15px;
+    border-radius: 0.3rem;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -167,7 +169,7 @@
 }
 
 .thumbnail-image-container {
-    height: 180px;
+    height: 140px;
     overflow: hidden;
     background-color: white;
 }
@@ -184,10 +186,11 @@
 }
 
 .collection-name {
-    padding: 1rem;
+    padding: 0.5rem;
     font-size: 1.2rem;
     text-align: center;
     margin: 0;
+    font-weight: 500;
 }
 
 .no-collections {
@@ -234,16 +237,25 @@
 .product-gallery {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 1.5rem;
+    gap: 0.8rem;
 }
 
 .product-card {
-    background-color: #eae8e8;
-    border-radius: 15px;
-    padding: 1rem;
+    background-color: #fbf5f5;
+    border-radius: 0;
+    padding: 0.5rem;
     transition: transform 0.3s ease;
     border: #ad3131 0.2rem solid;
+    display: flex;
+    flex-direction: column;
+}
 
+.product-info {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: stretch
 }
 
 .product-card:hover {
@@ -254,16 +266,15 @@
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    /* border: #ad3131 0.2rem solid; */
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
 }
 
 .product-card h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    min-height: 2.6rem;
-    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    min-height: 1.6rem;
+    text-align: left;
     color: #151111;
     margin-top: 0rem;
 
@@ -271,10 +282,11 @@
 
 .price {
     font-size: 1.2rem;
-    font-weight: 800;
+    font-weight: 700;
     color: #D63030;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
     text-align: center;
+    margin-top: 0.2rem;
 }
 
 .buy-button {
@@ -282,12 +294,14 @@
     color: #EAEAEA;
     border: none;
     border-radius: 5px;
-    padding: 0.5rem 1rem;
-    width: 100%;
+    padding: 0.4rem 0.5rem;
+    width: 80%;
     font-weight: 300;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin: 0;
+    align-self: center;
+    font-size: 0.9rem;
 }
 
 .buy-button:hover {
@@ -323,7 +337,7 @@
 }
 
 .collection-controls span{
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #EAEAEA;
 }
 .sort-controls{
@@ -331,16 +345,17 @@
   color: #0E0C0C;
   border: 1px solid #ccc;
   border-radius: 12px;
-  padding: 0.25rem 0.5rem;
+  padding: 0rem 0.5rem;
  
 }
 .sort-controls select {
   background: #EAEAEA;
   color: #0E0C0C;
-  font-size: 1rem;
+  font-size: 0.9rem;
   outline: none;
   transition: border 0.2s;
   border: none;
+  padding: 0.3rem 0.5rem;
 }
 
 .sort-controls select option {
@@ -350,7 +365,7 @@
 
 .breadcrumbs {
   margin-bottom: 0rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #444;
   display: flex;
   flex-wrap: wrap;
@@ -369,8 +384,9 @@
 }
 
 .breadcrumb-current {
-  color: red !important;
+  color: #ef4444;
   font-weight: bold;
+  font-size: 1.3rem;
 }
 
 .breadcrumb-separator {
@@ -404,7 +420,8 @@
 .inventory {
     font-size: 0.9rem;
     color: #000;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
 }
 
 /* Optional: Add this if you want to style HTML from the description */

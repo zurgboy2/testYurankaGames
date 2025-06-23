@@ -1,8 +1,9 @@
-// src/components/Store.js
 import React, { useState, useRef, useEffect } from 'react';
 import './Store.css';
 import { useNavigate } from 'react-router-dom';
 import { tcgCategories } from './tcgStoreData';
+
+const PRODUCTS_PER_PAGE = 12; // controls page size
 
 const StoreCom = () => {
   const [recentProducts, setRecentProducts] = useState([]);
@@ -14,16 +15,26 @@ const StoreCom = () => {
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [sortOption, setSortOption] = useState("latest");
 
+  // Pagination state
+  const [recentPage, setRecentPage] = useState(1);
+  const [collectionPage, setCollectionPage] = useState(1);
+
   const scrollerRef = useRef(null);
   const navigate = useNavigate();
 
   const [selectedTcg, setSelectedTcg] = useState(() => {
-  const savedTag = localStorage.getItem('selectedTcgTag');
-  return (
-    tcgCategories.find((tcg) => tcg.tag === savedTag) ||
-    tcgCategories[0]
-     );
+    const savedTag = localStorage.getItem('selectedTcgTag');
+    return (
+      tcgCategories.find((tcg) => tcg.tag === savedTag) ||
+      tcgCategories[0]
+    );
   });
+
+  // Reset page when filters change
+  useEffect(() => {
+    setRecentPage(1);
+    setCollectionPage(1);
+  }, [selectedTcg, selectedAnime, selectedCollection]);
 
   useEffect(() => {
     setSelectedCollection(null); 
@@ -65,11 +76,10 @@ const StoreCom = () => {
   // Fetch recent products for the selected TCG
   const fetchRecentProductsByTag = async (tag) => {
     setLoading(true);
-    
     try {
       const query = `
         query RecentProductsByTag {
-          products(query: "tag:${tag} AND inventory_total:>0 AND tag_not:test", first: 8, sortKey: CREATED_AT, reverse: true) {
+          products(query: "tag:${tag} AND inventory_total:>0 AND tag_not:test", first: 250, sortKey: CREATED_AT, reverse: true) {
             nodes {
               media(first: 1) {
                 nodes {
@@ -119,66 +129,65 @@ const StoreCom = () => {
   };
 
   const fetchRecentProductsByTagAndTitle = async (tag, titleContains) => {
-      setLoading(true);
-      const safeTitle = titleContains.replace(/"/g, '\\"');
-      const queryString = `tag:${tag} AND title:*${safeTitle}* AND inventory_total:>0 AND tag_not:test`;
+    setLoading(true);
+    const safeTitle = titleContains.replace(/"/g, '\\"');
+    const queryString = `tag:${tag} AND title:*${safeTitle}* AND inventory_total:>0 AND tag_not:test`;
 
-      try {
-        const query = `
-          query RecentProductsByTagAndTitle {
-            products(query: "${queryString}", first: 8, sortKey: CREATED_AT, reverse: true) {
-              nodes {
-                media(first: 1) {
-                  nodes {
-                    previewImage {
-                      url
-                    }
+    try {
+      const query = `
+        query RecentProductsByTagAndTitle {
+          products(query: "${queryString}", first: 250, sortKey: CREATED_AT, reverse: true) {
+            nodes {
+              media(first: 1) {
+                nodes {
+                  previewImage {
+                    url
                   }
                 }
-                title
-                totalInventory
-                id
-                descriptionHtml
-                priceRange {
-                  minVariantPrice {
-                    amount
-                    currencyCode
-                  }
+              }
+              title
+              totalInventory
+              id
+              descriptionHtml
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
                 }
               }
             }
           }
-        `;
-
-        const response = await fetch('https://064679-3.myshopify.com/api/2023-07/graphql.json', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Storefront-Access-Token': '5b98e116f2c08ee62389cf9331650002',
-          },
-          body: JSON.stringify({ query }),
-        });
-
-        const data = await response.json();
-
-        if (data.data && data.data.products && data.data.products.nodes) {
-          setRecentProducts(data.data.products.nodes);
-        } else {
-          setRecentProducts([]);
-          console.error('No recent products found or unexpected response format');
         }
-      } catch (error) {
-        console.error('Error fetching recent products:', error);
+      `;
+
+      const response = await fetch('https://064679-3.myshopify.com/api/2023-07/graphql.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': '5b98e116f2c08ee62389cf9331650002',
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      const data = await response.json();
+
+      if (data.data && data.data.products && data.data.products.nodes) {
+        setRecentProducts(data.data.products.nodes);
+      } else {
         setRecentProducts([]);
-      } finally {
-        setLoading(false);
+        console.error('No recent products found or unexpected response format');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching recent products:', error);
+      setRecentProducts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchCollectionThumbnails = async (tcg, selectedAnime = null) => {
     setLoading(true);
     let collections = [];
-
     if (tcg.tag === "anime" && selectedAnime) {
       collections = selectedAnime.collections;
     } 
@@ -190,6 +199,7 @@ const StoreCom = () => {
           thumbnailUrl: anime.image, 
         }))
       );
+      setLoading(false);
       return;
     } else if (tcg.collections) {
       collections = tcg.collections;
@@ -197,14 +207,12 @@ const StoreCom = () => {
 
     const thumbnailsPromises = collections.map(async (collection) => {
       try {
-
         let queryString;
         if (tcg.tag === "anime" && selectedAnime) {
           queryString = `tag:anime AND tag:${collection.tag} AND title:*${selectedAnime.name}* AND inventory_total:>0 AND tag_not:test`;
         } else {
           queryString = `tag:${tcg.tag} AND tag:${collection.tag} AND inventory_total:>0 AND tag_not:test`;
         }
-
         const query = `
           query CollectionThumbnail {
             products(query: "${queryString}", first: 5) {
@@ -216,7 +224,6 @@ const StoreCom = () => {
             }
           }
         `;
-
         const response = await fetch('https://064679-3.myshopify.com/api/2023-07/graphql.json', {
           method: 'POST',
           headers: {
@@ -225,10 +232,8 @@ const StoreCom = () => {
           },
           body: JSON.stringify({ query }),
         });
-
         const data = await response.json();
         let nodes = data.data?.products?.nodes || [];
-
         if (nodes.length > 0) {
           return {
             ...collection,
@@ -249,23 +254,21 @@ const StoreCom = () => {
           hasProducts: false,
           thumbnailUrl: null
         };
-      }finally{
-          setLoading(false);
       }
     });
 
     const thumbnails = await Promise.all(thumbnailsPromises);
     setCollectionThumbnails(thumbnails.filter(thumbnail => thumbnail.hasProducts));
+    setLoading(false);
   };
 
   // Fetch products for a specific collection
   const fetchCollectionProducts = async (tcgTag, collectionTag) => {
     setCollectionLoading(true);
-    
     try {
       const query = `
         query CollectionProducts {
-          products(query: "tag:${tcgTag} AND tag:${collectionTag} AND inventory_total:>0 AND tag_not:test", first: 12) {
+          products(query: "tag:${tcgTag} AND tag:${collectionTag} AND inventory_total:>0 AND tag_not:test", first: 250) {
             nodes {
               media(first: 1) {
                 nodes {
@@ -290,7 +293,6 @@ const StoreCom = () => {
           }
         }
       `;
-
       const response = await fetch('https://064679-3.myshopify.com/api/2023-07/graphql.json', {
         method: 'POST',
         headers: {
@@ -299,9 +301,7 @@ const StoreCom = () => {
         },
         body: JSON.stringify({ query }),
       });
-
       const data = await response.json();
-      
       if (data.data && data.data.products && data.data.products.nodes) {
         setCollectionProducts(data.data.products.nodes);
       } else {
@@ -318,11 +318,10 @@ const StoreCom = () => {
 
   const fetchCollectionProductsByTagAndName = async (tcgTag, collectionTag, tcgName) => {
     setCollectionLoading(true);
-    
     try {
       const query = `
         query CollectionProducts {
-          products(query: "tag:${tcgTag} AND tag:${collectionTag} AND inventory_total:>0 AND tag_not:test", first: 50) {
+          products(query: "tag:${tcgTag} AND tag:${collectionTag} AND inventory_total:>0 AND tag_not:test", first: 250) {
             nodes {
               media(first: 1) {
                 nodes {
@@ -347,7 +346,6 @@ const StoreCom = () => {
           }
         }
       `;
-
       const response = await fetch('https://064679-3.myshopify.com/api/2023-07/graphql.json', {
         method: 'POST',
         headers: {
@@ -356,9 +354,7 @@ const StoreCom = () => {
         },
         body: JSON.stringify({ query }),
       });
-
       const data = await response.json();
-
       let products = data.data?.products?.nodes || [];
       if (tcgName) {
         const nameLower = tcgName.toLowerCase();
@@ -366,7 +362,6 @@ const StoreCom = () => {
           product.title.toLowerCase().includes(nameLower)
         );
       }
-
       setCollectionProducts(products);
     } catch (error) {
       setCollectionProducts([]);
@@ -408,20 +403,59 @@ const StoreCom = () => {
   // Format price for display
   const formatPrice = (price, currency = 'USD') => {
     if (!price) return '$0.00';
-    
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency
     }).format(parseFloat(price));
   };
 
-  // Render product cards
+  // PAGINATION HELPERS
+
+  // Slices products for the current page
+  const getPaginatedProducts = (products, page) => {
+    const start = (page - 1) * PRODUCTS_PER_PAGE;
+    const end = start + PRODUCTS_PER_PAGE;
+    return products.slice(start, end);
+  };
+
+  // Renders pagination controls
+  const renderPaginationControls = (products, page, setPage) => {
+    const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+    if (totalPages <= 1) return null;
+    return (
+      <div className="pagination-controls">
+        <button
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+          className="pagination-btn"
+        >
+          Prev
+        </button>
+        {Array.from({ length: totalPages }).map((_, idx) => (
+          <button
+            key={idx + 1}
+            className={`pagination-btn ${page === idx + 1 ? 'active' : ''}`}
+            onClick={() => setPage(idx + 1)}
+          >
+            {idx + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages}
+          className="pagination-btn"
+        >
+          Next
+        </button>
+      </div>
+    );
+  };
+
+  // Render product cards (receives already paginated array)
   const renderProductCards = (products) => {
     return products.map((product) => {
-
-       const isPreSale = product.tags?.includes('pre-sale');
-       const inStock = product.totalInventory > 0 || isPreSale;
-
+      const isPreSale = product.tags?.includes('pre-sale');
+      const inStock = product.totalInventory > 0 || isPreSale;
       return (
         <div key={product.id} className="product-card">
           <img 
@@ -431,21 +465,22 @@ const StoreCom = () => {
           />
           <h4>{product.title}</h4>
           <div className="product-info">
-          <p className="inventory"> {inStock ? `In stock: ${product.totalInventory}` : 'Out of stock'}</p>          <p className="price">
-            {product.priceRange?.minVariantPrice 
-              ? formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)
-              : 'Price unavailable'}
-          </p>
+            <p className="inventory"> {inStock ? `In stock: ${product.totalInventory}` : 'Out of stock'}</p>
+            <p className="price">
+              {product.priceRange?.minVariantPrice 
+                ? formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)
+                : 'Price unavailable'}
+            </p>
           </div>
           <button 
             className="buy-button"
-              onClick={() => {
-                navigate(`/product?id=${encodeURIComponent(product.id)}`, { 
-                  state: { 
-                    productId: product.id
-                  } 
-                });
-              }}
+            onClick={() => {
+              navigate(`/product?id=${encodeURIComponent(product.id)}`, { 
+                state: { 
+                  productId: product.id
+                } 
+              });
+            }}
           >
             View Details
           </button>
@@ -455,23 +490,23 @@ const StoreCom = () => {
   };
 
   const sortProducts = (products, option) => {
-  switch (option) {
-    case "price-high":
-      return [...products].sort(
-        (a, b) =>
-          parseFloat(b.priceRange.minVariantPrice.amount) -
-          parseFloat(a.priceRange.minVariantPrice.amount)
-      );
-    case "price-low":
-      return [...products].sort(
-        (a, b) =>
-          parseFloat(a.priceRange.minVariantPrice.amount) -
-          parseFloat(b.priceRange.minVariantPrice.amount)
-      );
-    case "latest":
-    default:
-      return products;
-  }
+    switch (option) {
+      case "price-high":
+        return [...products].sort(
+          (a, b) =>
+            parseFloat(b.priceRange.minVariantPrice.amount) -
+            parseFloat(a.priceRange.minVariantPrice.amount)
+        );
+      case "price-low":
+        return [...products].sort(
+          (a, b) =>
+            parseFloat(a.priceRange.minVariantPrice.amount) -
+            parseFloat(b.priceRange.minVariantPrice.amount)
+        );
+      case "latest":
+      default:
+        return products;
+    }
   };
 
   const renderBreadcrumbs = () => {
@@ -482,7 +517,6 @@ const StoreCom = () => {
         setSelectedCollection(null);
       }},
     ];
-
     if (selectedTcg) {
       crumbs.push({
         name: selectedTcg.name,
@@ -492,22 +526,18 @@ const StoreCom = () => {
         }
       });
     }
-
     if (selectedTcg && selectedTcg.tag === "anime" && selectedAnime) {
       crumbs.push({
         name: selectedAnime.name,
         onClick: () => setSelectedCollection(null)
       });
     }
-
     if (selectedCollection) {
-      console.log("selected collection breadcrumb",selectedCollection.name);
       crumbs.push({
         name: selectedCollection.name,
         onClick: null 
       });
     }
-
     return (
       <nav className="breadcrumbs">
         {crumbs.map((crumb, idx) => (
@@ -547,7 +577,6 @@ const StoreCom = () => {
             </div>
           ))}
         </div>
-        {/* <button className="scroll-button right" onClick={scrollRight}>&#10095;</button> */}
       </div>
 
       <div className="tcg-content">
@@ -640,7 +669,7 @@ const StoreCom = () => {
           </>
         )}
 
-        {/* Collection Products */}
+        {/* Collection Products with Pagination */}
         {selectedCollection && (
           <div className="collection-products-section">
             <button className="collection-back-button" onClick={handleBackToCollections}>
@@ -649,7 +678,7 @@ const StoreCom = () => {
             <div className="collection-header">          
               <h3 className="collection-title">{selectedCollection.name}</h3>
             </div>
-            
+
             {collectionLoading ? (
               <div className="loading-container">
                 <div className="loading-spinner"></div>
@@ -658,22 +687,26 @@ const StoreCom = () => {
             ) : collectionProducts.length > 0 ? (
               <>
                 <div className="collection-controls">
-                  <span>Showing all {collectionProducts.length} results</span>
+                  <span>Showing {getPaginatedProducts(sortProducts(collectionProducts, sortOption), collectionPage).length} of {collectionProducts.length} results</span>
                   <div className="sort-controls">
                     <select
                       id="sort-select"
                       value={sortOption}
-                      onChange={e => setSortOption(e.target.value)}
+                      onChange={e => {
+                        setSortOption(e.target.value);
+                        setCollectionPage(1);
+                      }}
                     >
                       <option value="latest">Sort by Latest</option>
                       <option value="price-high">Sort by Price: High to Low</option>
                       <option value="price-low">Sort by Price: Low to High</option>
                     </select>
-                    </div>
+                  </div>
                 </div>
                 <div className="product-gallery">
-                  {renderProductCards(sortProducts(collectionProducts, sortOption))}
+                  {renderProductCards(getPaginatedProducts(sortProducts(collectionProducts, sortOption), collectionPage))}
                 </div>
+                {renderPaginationControls(sortProducts(collectionProducts, sortOption), collectionPage, setCollectionPage)}
               </>
             ) : (
               <div className="no-products">
@@ -683,7 +716,7 @@ const StoreCom = () => {
           </div>
         )}
 
-        {/* Recently Stocked Products */}
+        {/* Recently Stocked Products with Pagination */}
         {!selectedCollection && (
           <>
             <h3 className="section-heading">Recently Stocked</h3>
@@ -693,9 +726,12 @@ const StoreCom = () => {
                 <p>Loading products...</p>
               </div>
             ) : recentProducts.length > 0 ? (
-              <div className="product-gallery">
-                {renderProductCards(recentProducts)}
-              </div>
+              <>
+                <div className="product-gallery">
+                  {renderProductCards(getPaginatedProducts(recentProducts, recentPage))}
+                </div>
+                {renderPaginationControls(recentProducts, recentPage, setRecentPage)}
+              </>
             ) : (
               <div className="no-products">
                 <p>No products found for {selectedTcg.name}.</p>
